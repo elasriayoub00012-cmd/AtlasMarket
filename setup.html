@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sellora - Setup</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .lang-select {
+      background-color: white;
+      border: none;
+      color: #007bff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #007bff;
+      font-size: 1.3rem;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .option:hover {
+      border-color: #007bff;
+      background-color: #f8faff;
+    }
+
+    .option img {
+      width: 35px;
+      height: 35px;
+    }
+
+    .selected {
+      border-color: #007bff;
+      background-color: #eaf2ff;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn-back {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+
+    .btn-next {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sellora</h1>
+    <select class="lang-select" id="language">
+      <option value="en">English</option>
+      <option value="ar">العربية</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+    </select>
+  </header>
+
+  <div class="container">
+    <!-- Step 1 -->
+    <div class="step" id="step1">
+      <h2 data-en="Where do you want to sell?" data-ar="أين تريد البيع؟" data-fr="Où voulez-vous vendre ?" data-es="¿Dónde quieres vender?">Where do you want to sell?</h2>
+      <div class="options">
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/869/869869.png"/><span data-en="Online store" data-ar="متجر على الإنترنت" data-fr="Boutique en ligne" data-es="Tienda en línea">Online store</span></div>
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/1261/1261163.png"/><span data-en="Retail store" data-ar="متجر تقليدي" data-fr="Magasin de détail" data-es="Tienda física">Retail store</span></div>
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/4712/4712058.png"/><span data-en="In-person events" data-ar="الفعاليات والمعارض" data-fr="Événements en personne" data-es="Eventos presenciales">In-person events</span></div>
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png"/><span data-en="Existing website" data-ar="موقع ويب موجود" data-fr="Site Web existant" data-es="Sitio web existente">Existing website</span></div>
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"/><span data-en="Social media" data-ar="وسائل التواصل الاجتماعي" data-fr="Réseaux sociaux" data-es="Redes sociales">Social media</span></div>
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"/><span data-en="Online marketplaces" data-ar="الأسواق عبر الإنترنت" data-fr="Places de marché" data-es="Mercados en línea">Online marketplaces</span></div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step hidden" id="step2">
+      <h2 data-en="Is this store for a new or existing business?" data-ar="هل هذا المتجر لمشروع جديد أو قائم؟" data-fr="S'agit-il d'une nouvelle entreprise ou existante ?" data-es="¿Es esta tienda para un negocio nuevo o existente?">Is this store for a new or existing business?</h2>
+      <div class="options">
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/2995/2995640.png"/><span data-en="New business" data-ar="مشروع جديد" data-fr="Nouvelle entreprise" data-es="Nuevo negocio">New business</span></div>
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/3094/3094850.png"/><span data-en="Existing business" data-ar="عمل قائم" data-fr="Entreprise existante" data-es="Negocio existente">Existing business</span></div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step hidden" id="step3">
+      <h2 data-en="What do you plan to sell?" data-ar="ماذا تخطط لبيعه؟" data-fr="Que prévoyez-vous de vendre ?" data-es="¿Qué planeas vender?">What do you plan to sell?</h2>
+      <div class="options">
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/3063/3063198.png"/><span data-en="Physical products" data-ar="منتجات مادية" data-fr="Produits physiques" data-es="Productos físicos">Physical products</span></div>
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/924/924915.png"/><span data-en="Digital products" data-ar="منتجات رقمية" data-fr="Produits numériques" data-es="Productos digitales">Digital products</span></div>
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135676.png"/><span data-en="Dropshipping" data-ar="دروبشيبينغ" data-fr="Dropshipping" data-es="Dropshipping">Dropshipping</span></div>
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/2990/2990121.png"/><span data-en="Services" data-ar="خدمات" data-fr="Services" data-es="Servicios">Services</span></div>
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/3208/3208981.png"/><span data-en="Print on demand" data-ar="منتجات الطباعة عند الطلب" data-fr="Impression à la demande" data-es="Impresión bajo demanda">Print on demand</span></div>
+        <div class="option"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png"/><span data-en="Decide later" data-ar="سأقرر لاحقًا" data-fr="Je déciderai plus tard" data-es="Decidiré más tarde">Decide later</span></div>
+      </div>
+    </div>
+
+    <!-- Step 4 (final) -->
+    <div class="step hidden" id="step4">
+      <h2 data-en="All set! 🎉" data-ar="تم الإعداد بنجاح 🎉" data-fr="Tout est prêt ! 🎉" data-es="¡Todo listo! 🎉">All set! 🎉</h2>
+      <p data-en="Your store preferences have been saved. You’re ready to continue building your Sellora store."
+         data-ar="تم حفظ تفضيلات متجرك. أنت جاهز للبدء في إنشاء متجرك على Sellora."
+         data-fr="Vos préférences de boutique ont été enregistrées. Vous êtes prêt à continuer à construire votre boutique Sellora."
+         data-es="Se han guardado tus preferencias de tienda. Estás listo para continuar construyendo tu tienda Sellora.">
+         Your store preferences have been saved. You’re ready to continue building your Sellora store.
+      </p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <button class="btn btn-back" id="backBtn">Back</button>
+      <button class="btn btn-next" id="nextBtn">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const steps = document.querySelectorAll('.step');
+    const nextBtn = document.getElementById('nextBtn');
+    const backBtn = document.getElementById('backBtn');
+    const langSelect = document.getElementById('language');
+    let currentStep = 0;
+
+    function showStep(index) {
+      steps.forEach((s, i) => s.classList.toggle('hidden', i !== index));
+      backBtn.style.display = index === 0 ? 'none' : 'inline-block';
+      nextBtn.style.display = index === steps.length - 1 ? 'none' : 'inline-block';
+    }
+
+    document.querySelectorAll('.option').forEach(option => {
+      option.addEventListener('click', () => option.classList.toggle('selected'));
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentStep < steps.length - 1) currentStep++;
+      showStep(currentStep);
+    });
+
+    backBtn.addEventListener('click', () => {
+      if (currentStep > 0) currentStep--;
+      showStep(currentStep);
+    });
+
+    langSelect.addEventListener('change', (e) => {
+      const lang = e.target.value;
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.innerText = el.getAttribute(`data-${lang}`) || el.getAttribute('data-en');
+      });
+    });
+
+    showStep(currentStep);
+  </script>
+</body>
+</html>
