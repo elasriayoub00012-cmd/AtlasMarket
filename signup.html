@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up - Sellora</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Sellora</div>
+    <div class="controls">
+      <button id="langBtn" class="lang-btn">🌐 Language</button>
+      <div id="langMenu" class="lang-menu">
+        <button data-lang="en">English</button>
+        <button data-lang="ar">العربية</button>
+        <button data-lang="fr">Français</button>
+        <button data-lang="es">Español</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="form-page">
+    <div class="form-card">
+      <h2 id="signupTitle">Create your account</h2>
+      <form id="signupForm">
+        <label id="labelName">Full name</label>
+        <input id="signupName" type="text" placeholder="Full name" required />
+        <label id="labelEmail">Email</label>
+        <input id="signupEmail" type="email" placeholder="Email" required />
+        <label id="labelPassword">Password</label>
+        <input id="signupPass" type="password" placeholder="Password" required />
+        <label id="labelConfirm">Confirm Password</label>
+        <input id="signupConfirm" type="password" placeholder="Confirm password" required />
+        <button type="submit" class="btn signup-btn">Create Account</button>
+      </form>
+      <p class="small">Already have an account? <a href="login.html" id="toLogin">Login</a></p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
