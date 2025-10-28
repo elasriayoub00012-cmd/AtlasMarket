@@ -1,32 +1,27 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>إنشاء حساب - Atlas Market</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up - Sellora</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <div class="container">
-    <h2>إنشاء حساب جديد</h2>
-
+    <h2>🛍️ Create your account</h2>
     <form id="signupForm">
-      <input type="text" id="signupName" placeholder="الاسم الكامل" required />
-      <input type="email" id="signupEmail" placeholder="البريد الإلكتروني" required />
-      <input type="password" id="signupPass" placeholder="كلمة المرور" required />
-      <input type="password" id="signupConfirm" placeholder="تأكيد كلمة المرور" required />
-      <button type="submit">إنشاء حساب</button>
+      <input type="text" id="signupName" placeholder="Full name" required />
+      <input type="email" id="signupEmail" placeholder="Email address" required />
+      <input type="password" id="signupPass" placeholder="Password" required />
+      <input type="password" id="signupConfirm" placeholder="Confirm password" required />
+      <button type="submit">Create Account</button>
     </form>
-
-    <p>عندك حساب؟ <a href="login.html">تسجيل الدخول</a></p>
+    <p>Already have an account? <a href="login.html">Login</a></p>
   </div>
 
-  <!-- مكتبة Supabase -->
+  <!-- Supabase library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-  <!-- سكريبت الاتصال بقاعدة البيانات -->
-  <script src="supabas.js"></script>
-
+  <!-- Connection script -->
+  <script src="supabase.js"></script>
 </body>
 </html>
