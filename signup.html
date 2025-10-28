@@ -1,43 +1,32 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sign Up - Sellora</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إنشاء حساب - Atlas Market</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">Sellora</div>
-    <div class="controls">
-      <button id="langBtn" class="lang-btn">🌐 Language</button>
-      <div id="langMenu" class="lang-menu">
-        <button data-lang="en">English</button>
-        <button data-lang="ar">العربية</button>
-        <button data-lang="fr">Français</button>
-        <button data-lang="es">Español</button>
-      </div>
-    </div>
-  </header>
 
-  <main class="form-page">
-    <div class="form-card">
-      <h2 id="signupTitle">Create your account</h2>
-      <form id="signupForm">
-        <label id="labelName">Full name</label>
-        <input id="signupName" type="text" placeholder="Full name" required />
-        <label id="labelEmail">Email</label>
-        <input id="signupEmail" type="email" placeholder="Email" required />
-        <label id="labelPassword">Password</label>
-        <input id="signupPass" type="password" placeholder="Password" required />
-        <label id="labelConfirm">Confirm Password</label>
-        <input id="signupConfirm" type="password" placeholder="Confirm password" required />
-        <button type="submit" class="btn signup-btn">Create Account</button>
-      </form>
-      <p class="small">Already have an account? <a href="login.html" id="toLogin">Login</a></p>
-    </div>
-  </main>
+  <div class="container">
+    <h2>إنشاء حساب جديد</h2>
 
-  <script src="script.js"></script>
+    <form id="signupForm">
+      <input type="text" id="signupName" placeholder="الاسم الكامل" required />
+      <input type="email" id="signupEmail" placeholder="البريد الإلكتروني" required />
+      <input type="password" id="signupPass" placeholder="كلمة المرور" required />
+      <input type="password" id="signupConfirm" placeholder="تأكيد كلمة المرور" required />
+      <button type="submit">إنشاء حساب</button>
+    </form>
+
+    <p>عندك حساب؟ <a href="login.html">تسجيل الدخول</a></p>
+  </div>
+
+  <!-- مكتبة Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <!-- سكريبت الاتصال بقاعدة البيانات -->
+  <script src="supabas.js"></script>
+
 </body>
 </html>
