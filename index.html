@@ -1,48 +1,164 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sellora</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: "Poppins", sans-serif;
+      background-color: #ffeb3b; /* خلفية صفراء */
+      background-image: 
+        url('https://i.imgur.com/tcGZYJY.png'), /* ساعة */
+        url('https://i.imgur.com/2okgNNC.png'), /* هاتف */
+        url('https://i.imgur.com/nL8HT5n.png'), /* حاسوب */
+        url('https://i.imgur.com/WaJrD5y.png'), /* ملابس */
+        url('https://i.imgur.com/8D9dUti.png'), /* بطاقة */
+        url('https://i.imgur.com/o6kJ3sl.png'); /* اكسيسوارات */
+      background-size: 150px, 140px, 200px, 180px, 130px, 160px;
+      background-repeat: no-repeat;
+      background-position:
+        10% 15%, 70% 25%, 50% 60%, 80% 80%, 25% 75%, 60% 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    /* اسم المنصة */
+    .brand {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    /* زر اللغات */
+    .lang-switch {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .lang-btn {
+      background: white;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .lang-menu {
+      display: none;
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .lang-menu button {
+      display: block;
+      background: none;
+      color: #333;
+      width: 100%;
+      text-align: left;
+      padding: 8px 14px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .lang-menu button:hover {
+      background: #f0f0f0;
+    }
+
+    /* أزرار الاشتراك وتسجيل الدخول */
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+    }
+
+    button.main-btn {
+      width: 260px;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    #signupBtn {
+      background-color: #d50000; /* أحمر */
+    }
+    #signupBtn:hover {
+      background-color: #a00000;
+    }
+
+    #loginBtn {
+      background-color: #007bff; /* أزرق */
+    }
+    #loginBtn:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">Sellora</div>
-    <div class="controls">
-      <button id="langBtn" class="lang-btn">🌐 Language</button>
-      <div id="langMenu" class="lang-menu">
-        <button data-lang="en">English</button>
-        <button data-lang="ar">العربية</button>
-        <button data-lang="fr">Français</button>
-        <button data-lang="es">Español</button>
-      </div>
+
+  <div class="brand">Sellora</div>
+
+  <div class="lang-switch">
+    <button class="lang-btn" onclick="toggleLangMenu()">🌐 لغات</button>
+    <div class="lang-menu" id="langMenu">
+      <button onclick="changeLang('ar')">العربية</button>
+      <button onclick="changeLang('en')">English</button>
+      <button onclick="changeLang('fr')">Français</button>
+      <button onclick="changeLang('es')">Español</button>
     </div>
-  </header>
+  </div>
 
-  <main>
-    <section class="hero">
-      <div class="slider">
-        <div class="slides">
-          <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1600&q=60" alt="sale">
-          <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=1600&q=60" alt="shop">
-          <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1600&q=60" alt="products">
-        </div>
-      </div>
+  <div class="buttons">
+    <button id="signupBtn" class="main-btn" onclick="window.location.href='signup.html'">اشــتــراك</button>
+    <button id="loginBtn" class="main-btn" onclick="window.location.href='login.html'">تسجيل الدخول</button>
+  </div>
 
-      <div class="overlay"></div>
+  <script>
+    // عرض / إخفاء اللغات
+    function toggleLangMenu() {
+      const menu = document.getElementById("langMenu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
 
-      <div class="hero-content">
-        <h1 id="title">Welcome to Sellora</h1>
-        <p id="subtitle">The best deals and products in one place</p>
-        <div class="actions">
-          <button id="loginBtn" class="btn login-btn">Login</button>
-          <button id="signupBtn" class="btn signup-btn">Sign Up</button>
-        </div>
-      </div>
-    </section>
-  </main>
+    // ترجمة النصوص
+    const translations = {
+      ar: { signup: "اشــتــراك", login: "تسجيل الدخول" },
+      en: { signup: "Sign Up", login: "Login" },
+      fr: { signup: "S'inscrire", login: "Connexion" },
+      es: { signup: "Registrarse", login: "Iniciar sesión" }
+    };
 
-  <script src="script.js"></script>
+    function changeLang(lang) {
+      const t = translations[lang];
+      document.getElementById("signupBtn").innerText = t.signup;
+      document.getElementById("loginBtn").innerText = t.login;
+      document.getElementById("langMenu").style.display = "none";
+    }
+  </script>
+
 </body>
 </html>
