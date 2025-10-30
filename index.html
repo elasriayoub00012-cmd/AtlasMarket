@@ -1,137 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sellora</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
       height: 100vh;
-      width: 100vw;
-      background-color: #FFD700;
-      background-image:
-        url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=200&q=60'),
-        url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=200&q=60'),
-        url('https://images.unsplash.com/photo-1606813902912-982ae58a3c47?auto=format&fit=crop&w=200&q=60'),
-        url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=200&q=60'),
-        url('https://images.unsplash.com/photo-1580894894513-d52b3cfd7a2d?auto=format&fit=crop&w=200&q=60');
+      background-color: #FFD700; /* أصفر */
+      background-image: url("https://i.ibb.co/n6dpxc2/yellow-pattern.png");
       background-repeat: repeat;
-      background-size: 150px;
-      animation: moveBg 30s infinite alternate linear;
-      font-family: Arial, sans-serif;
-    }
-
-    @keyframes moveBg {
-      0% { background-position: 0 0; }
-      25% { background-position: 20px 10px; }
-      50% { background-position: -20px 30px; }
-      75% { background-position: 10px -20px; }
-      100% { background-position: 0 0; }
+      background-size: 120px;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
 
     header {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      right: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-    }
-
-    .brand {
-      font-size: 28px;
+      position: absolute;
+      top: 15px;
+      left: 20px;
       font-weight: bold;
-      color: #333;
+      font-size: 26px;
+      color: #222;
     }
 
-    .lang-btn {
+    .language-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
       background: white;
       border: none;
       padding: 8px 15px;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .lang-menu {
-      display: none;
-      position: absolute;
-      right: 10px;
-      top: 45px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      overflow: hidden;
+    .language-btn img {
+      width: 18px;
     }
 
-    .lang-menu button {
-      border: none;
-      background: white;
-      padding: 10px 15px;
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .lang-menu button:hover {
-      background-color: #eee;
-    }
-
-    main {
+    .buttons {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       gap: 15px;
     }
 
-    .btn {
+    button {
+      width: 180px;
+      height: 50px;
       border: none;
-      border-radius: 10px;
       color: white;
-      font-size: 1.2em;
-      width: 220px;
-      padding: 15px;
-      cursor: pointer;
+      font-size: 18px;
       font-weight: bold;
-      transition: transform 0.2s ease;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
-    .btn:hover {
-      transform: scale(1.05);
-    }
-
-    .signup-btn {
+    #signupBtn {
       background-color: red;
     }
 
-    .login-btn {
-      background-color: #007BFF;
+    #signupBtn:hover {
+      background-color: #cc0000;
+    }
+
+    #loginBtn {
+      background-color: #007bff;
+    }
+
+    #loginBtn:hover {
+      background-color: #0056b3;
+    }
+
+    /* قائمة اللغات */
+    .language-menu {
+      display: none;
+      position: absolute;
+      top: 55px;
+      right: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .language-menu button {
+      width: 100%;
+      color: black;
+      background: none;
+      text-align: left;
+      padding: 10px 15px;
+      border-radius: 0;
+      font-size: 16px;
+    }
+
+    .language-menu button:hover {
+      background: #f0f0f0;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">Sellora</div>
-    <div>
-      <button id="langBtn" class="lang-btn">🌐 Languages</button>
-      <div id="langMenu" class="lang-menu">
-        <button data-lang="en">English</button>
-        <button data-lang="ar">العربية</button>
-        <button data-lang="fr">Français</button>
-        <button data-lang="es">Español</button>
-      </div>
-    </div>
-  </header>
+  <header>Sellora</header>
 
-  <main>
-    <button class="btn signup-btn" onclick="alert('Signup clicked!')">Sign Up</button>
-    <button class="btn login-btn" onclick="alert('Login clicked!')">Login</button>
-  </main>
+  <button class="language-btn" id="langBtn">
+    🌐 Languages
+  </button>
+
+  <div class="language-menu" id="langMenu">
+    <button onclick="setLanguage('ar')">العربية</button>
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('fr')">Français</button>
+    <button onclick="setLanguage('es')">Español</button>
+  </div>
+
+  <div class="buttons">
+    <button id="signupBtn" onclick="window.location.href='signup.html'">Sign Up</button>
+    <button id="loginBtn" onclick="window.location.href='login.html'">Login</button>
+  </div>
 
   <script>
     const langBtn = document.getElementById("langBtn");
@@ -141,22 +137,10 @@
       langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
     });
 
-    const langTexts = {
-      en: { signup: "Sign Up", login: "Login", lang: "🌐 Languages" },
-      ar: { signup: "اشتراك", login: "تسجيل الدخول", lang: "🌐 اللغات" },
-      fr: { signup: "S'inscrire", login: "Connexion", lang: "🌐 Langues" },
-      es: { signup: "Registrarse", login: "Iniciar sesión", lang: "🌐 Idiomas" }
-    };
-
-    document.querySelectorAll("#langMenu button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const lang = btn.dataset.lang;
-        document.querySelector(".signup-btn").textContent = langTexts[lang].signup;
-        document.querySelector(".login-btn").textContent = langTexts[lang].login;
-        langBtn.textContent = langTexts[lang].lang;
-        langMenu.style.display = "none";
-      });
-    });
+    function setLanguage(lang) {
+      alert("🔄 اللغة ستتغير إلى: " + lang);
+      langMenu.style.display = "none";
+    }
   </script>
 </body>
 </html>
