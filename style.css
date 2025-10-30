@@ -1,28 +1,111 @@
+/* ===== خلفية متحركة بالصور ===== */
+@keyframes moveBackground {
+  0% { background-position: left top; }
+  25% { background-position: right top; }
+  50% { background-position: right bottom; }
+  75% { background-position: left bottom; }
+  100% { background-position: left top; }
+}
+
 body {
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #0099ff, #ffffff);
+  height: 100vh;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
+  background: url('https://i.imgur.com/mbnM0zq.jpg'), 
+              url('https://i.imgur.com/XW9KnyT.jpg'), 
+              url('https://i.imgur.com/xm0sHqx.jpg'),
+              url('https://i.imgur.com/cI4uD4u.jpg');
+  background-color: #ffeb3b; /* أصفر */
+  background-size: 200px auto, 200px auto, 200px auto, 200px auto;
+  background-repeat: repeat;
+  animation: moveBackground 25s infinite ease-in-out;
 }
 
+/* ===== الصندوق الرئيسي ===== */
 .container {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
   width: 90%;
   max-width: 400px;
   text-align: center;
+  position: relative;
 }
 
-h2 {
-  margin-bottom: 20px;
+/* ===== الأزرار ===== */
+button {
+  width: 95%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  margin: 8px 0;
+  transition: 0.3s;
+}
+
+#signupBtn {
+  background: #d50000; /* أحمر */
+}
+#signupBtn:hover {
+  background: #a00000;
+}
+
+#loginBtn {
+  background: #007bff; /* أزرق */
+}
+#loginBtn:hover {
+  background: #0056b3;
+}
+
+/* ===== زر اللغات ===== */
+.lang-switch {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.lang-btn {
+  background: white;
   color: #333;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
+.lang-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.lang-menu button {
+  display: block;
+  background: none;
+  color: #333;
+  width: 100%;
+  text-align: left;
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.lang-menu button:hover {
+  background: #f0f0f0;
+}
+
+/* ===== الإدخالات ===== */
 input {
   width: 90%;
   padding: 12px;
@@ -30,25 +113,4 @@ input {
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 16px;
-}
-
-button {
-  width: 95%;
-  padding: 12px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-button:hover {
-  background: #0056b3;
-}
-
-a {
-  color: #007bff;
-  text-decoration: none;
 }
