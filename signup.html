@@ -8,20 +8,91 @@
 </head>
 <body>
   <div class="container">
-    <h2>🛍️ Create your account</h2>
+
+    <!-- زر اللغات -->
+    <div class="lang-switch">
+      <button class="lang-btn" onclick="toggleLangMenu()">🌐 لغات</button>
+      <div class="lang-menu" id="langMenu">
+        <button onclick="changeLang('ar')">العربية</button>
+        <button onclick="changeLang('en')">English</button>
+        <button onclick="changeLang('fr')">Français</button>
+        <button onclick="changeLang('es')">Español</button>
+      </div>
+    </div>
+
+    <h2 id="title">🛍️ إنشاء حساب</h2>
     <form id="signupForm">
-      <input type="text" id="signupName" placeholder="Full name" required />
-      <input type="email" id="signupEmail" placeholder="Email address" required />
-      <input type="password" id="signupPass" placeholder="Password" required />
-      <input type="password" id="signupConfirm" placeholder="Confirm password" required />
-      <button type="submit">Create Account</button>
+      <input type="text" id="signupName" placeholder="الاسم الكامل" required />
+      <input type="email" id="signupEmail" placeholder="البريد الإلكتروني" required />
+      <input type="password" id="signupPass" placeholder="كلمة المرور" required />
+      <input type="password" id="signupConfirm" placeholder="تأكيد كلمة المرور" required />
+      <button id="signupBtn" type="submit">إنشاء حساب</button>
+      <button id="loginBtn" type="button" onclick="window.location.href='login.html'">تسجيل الدخول</button>
     </form>
-    <p>Already have an account? <a href="login.html">Login</a></p>
   </div>
 
-  <!-- Supabase library -->
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <!-- Connection script -->
   <script src="supabase.js"></script>
+
+  <script>
+    // عرض / إخفاء قائمة اللغات
+    function toggleLangMenu() {
+      const menu = document.getElementById("langMenu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    // ترجمة الصفحة
+    const translations = {
+      ar: {
+        title: "🛍️ إنشاء حساب",
+        name: "الاسم الكامل",
+        email: "البريد الإلكتروني",
+        pass: "كلمة المرور",
+        confirm: "تأكيد كلمة المرور",
+        signup: "إنشاء حساب",
+        login: "تسجيل الدخول"
+      },
+      en: {
+        title: "🛍️ Create Account",
+        name: "Full name",
+        email: "Email address",
+        pass: "Password",
+        confirm: "Confirm password",
+        signup: "Sign Up",
+        login: "Login"
+      },
+      fr: {
+        title: "🛍️ Créer un compte",
+        name: "Nom complet",
+        email: "Adresse e-mail",
+        pass: "Mot de passe",
+        confirm: "Confirmer le mot de passe",
+        signup: "Créer un compte",
+        login: "Connexion"
+      },
+      es: {
+        title: "🛍️ Crear cuenta",
+        name: "Nombre completo",
+        email: "Correo electrónico",
+        pass: "Contraseña",
+        confirm: "Confirmar contraseña",
+        signup: "Crear cuenta",
+        login: "Iniciar sesión"
+      }
+    };
+
+    function changeLang(lang) {
+      const t = translations[lang];
+      document.getElementById("title").innerText = t.title;
+      document.getElementById("signupName").placeholder = t.name;
+      document.getElementById("signupEmail").placeholder = t.email;
+      document.getElementById("signupPass").placeholder = t.pass;
+      document.getElementById("signupConfirm").placeholder = t.confirm;
+      document.getElementById("signupBtn").innerText = t.signup;
+      document.getElementById("loginBtn").innerText = t.login;
+      document.getElementById("langMenu").style.display = "none";
+    }
+  </script>
 </body>
 </html>
