@@ -5,44 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sellora</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #ffcc00;
-      background-image: url('https://images.unsplash.com/photo-1616628182509-ff3c4b1c8bdf?auto=format&fit=crop&w=800&q=60'),
-                        url('https://images.unsplash.com/photo-1607082349566-187e8de0ed9a?auto=format&fit=crop&w=800&q=60'),
-                        url('https://images.unsplash.com/photo-1598970434795-0c54fe7c0649?auto=format&fit=crop&w=800&q=60'),
-                        url('https://images.unsplash.com/photo-1606813902912-982ae58a3c47?auto=format&fit=crop&w=800&q=60'),
-                        url('https://images.unsplash.com/photo-1616627458482-bb4a9c9ac9dd?auto=format&fit=crop&w=800&q=60');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-      background-attachment: fixed;
-      animation: moveBg 15s infinite alternate ease-in-out;
+      height: 100vh;
+      width: 100vw;
+      background-color: #FFD700;
+      background-image:
+        url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=200&q=60'),
+        url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=200&q=60'),
+        url('https://images.unsplash.com/photo-1606813902912-982ae58a3c47?auto=format&fit=crop&w=200&q=60'),
+        url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=200&q=60'),
+        url('https://images.unsplash.com/photo-1580894894513-d52b3cfd7a2d?auto=format&fit=crop&w=200&q=60');
+      background-repeat: repeat;
+      background-size: 150px;
+      animation: moveBg 30s infinite alternate linear;
+      font-family: Arial, sans-serif;
     }
 
     @keyframes moveBg {
-      0% { background-position: 50% 50%; }
-      25% { background-position: 40% 60%; }
-      50% { background-position: 60% 40%; }
-      75% { background-position: 55% 55%; }
-      100% { background-position: 50% 50%; }
+      0% { background-position: 0 0; }
+      25% { background-position: 20px 10px; }
+      50% { background-position: -20px 30px; }
+      75% { background-position: 10px -20px; }
+      100% { background-position: 0 0; }
     }
 
     header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      right: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      z-index: 100;
     }
 
     .brand {
-      font-size: 1.5em;
+      font-size: 28px;
       font-weight: bold;
       color: #333;
     }
@@ -50,55 +50,55 @@
     .lang-btn {
       background: white;
       border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
+      padding: 8px 15px;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: 500;
+      font-weight: bold;
     }
 
     .lang-menu {
       display: none;
       position: absolute;
-      right: 20px;
+      right: 10px;
       top: 45px;
       background: white;
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      overflow: hidden;
     }
 
     .lang-menu button {
-      display: block;
-      width: 100%;
       border: none;
       background: white;
-      padding: 8px 12px;
+      padding: 10px 15px;
+      width: 100%;
       text-align: left;
       cursor: pointer;
     }
 
     .lang-menu button:hover {
-      background: #f0f0f0;
+      background-color: #eee;
     }
 
     main {
-      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      gap: 10px;
+      height: 100vh;
+      gap: 15px;
     }
 
     .btn {
       border: none;
-      border-radius: 6px;
+      border-radius: 10px;
       color: white;
       font-size: 1.2em;
-      width: 200px;
-      padding: 12px;
+      width: 220px;
+      padding: 15px;
       cursor: pointer;
       font-weight: bold;
-      transition: 0.3s;
+      transition: transform 0.2s ease;
     }
 
     .btn:hover {
@@ -110,14 +110,14 @@
     }
 
     .login-btn {
-      background-color: #007bff;
+      background-color: #007BFF;
     }
   </style>
 </head>
 <body>
   <header>
     <div class="brand">Sellora</div>
-    <div class="lang-container">
+    <div>
       <button id="langBtn" class="lang-btn">🌐 Languages</button>
       <div id="langMenu" class="lang-menu">
         <button data-lang="en">English</button>
@@ -129,8 +129,8 @@
   </header>
 
   <main>
-    <button class="btn signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
-    <button class="btn login-btn" onclick="window.location.href='login.html'">Login</button>
+    <button class="btn signup-btn" onclick="alert('Signup clicked!')">Sign Up</button>
+    <button class="btn login-btn" onclick="alert('Login clicked!')">Login</button>
   </main>
 
   <script>
