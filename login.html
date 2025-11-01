@@ -3,94 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تسجيل الدخول - Sellora</title>
+  <title>Sellora - Login</title>
   <style>
     body {
       margin: 0;
       padding: 0;
+      background: #FFD700;
       font-family: "Poppins", sans-serif;
-      background-color: #FFD700;
       height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
-
     header {
       position: absolute;
       top: 15px;
       left: 20px;
       font-weight: bold;
-      font-size: 24px;
-      color: #222;
-    }
-
-    h1 {
-      font-size: 40px;
-      font-weight: 400;
-      margin-bottom: 30px;
+      font-size: 26px;
       color: #000;
     }
-
-    form {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      display: flex;
-      flex-direction: column;
-      width: 300px;
-      gap: 15px;
-    }
-
-    input {
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-    }
-
-    button {
-      border: none;
-      color: white;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 17px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    #loginBtn {
-      background-color: #007bff;
-    }
-
-    #signupBtn {
-      background-color: red;
-    }
-
     .language-btn {
       position: absolute;
       top: 15px;
       right: 20px;
       background: white;
-      border: none;
+      border: 1px solid #ccc;
       padding: 8px 15px;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
+      color: #000;
     }
-
     .language-menu {
       display: none;
       position: absolute;
       top: 55px;
       right: 20px;
       background: white;
+      border: 1px solid #ccc;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
-
     .language-menu button {
       width: 100%;
       background: none;
@@ -98,18 +53,60 @@
       text-align: left;
       padding: 10px 15px;
       cursor: pointer;
+      color: #000;
       font-size: 16px;
     }
-
     .language-menu button:hover {
       background: #f0f0f0;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 500;
+      margin-top: 80px;
+      margin-bottom: 25px;
+    }
+    .form {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      width: 85%;
+      max-width: 350px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .form input.error {
+      border: 2px solid red;
+    }
+    .form button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      border: none;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .submit {
+      background: #007bff;
+      margin-bottom: 10px;
+    }
+    .back {
+      background: #000;
     }
   </style>
 </head>
 <body>
   <header>Sellora</header>
 
-  <button class="language-btn" id="langBtn">Lange</button>
+  <button class="language-btn" id="langBtn">Langue</button>
   <div class="language-menu" id="langMenu">
     <button onclick="setLanguage('ar')">العربية</button>
     <button onclick="setLanguage('en')">English</button>
@@ -117,47 +114,60 @@
     <button onclick="setLanguage('es')">Español</button>
   </div>
 
-  <h1 id="formTitle">تسجيل الدخول</h1>
+  <h1 id="title">تسجيل الدخول</h1>
 
-  <form id="loginForm">
-    <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-    <input type="password" id="password" placeholder="كلمة المرور" required>
-    <button id="loginBtn" type="submit">تسجيل الدخول</button>
-    <button id="signupBtn" type="button" onclick="goToPage('signup.html')">إنشاء حساب</button>
-  </form>
+  <div class="form">
+    <input id="email" placeholder="البريد الإلكتروني">
+    <input id="password" type="password" placeholder="كلمة المرور">
+    <button class="submit" id="loginBtn">تسجيل الدخول</button>
+    <button class="back" onclick="window.location.href='index.html'">عودة</button>
+  </div>
 
   <script>
     const langBtn = document.getElementById("langBtn");
     const langMenu = document.getElementById("langMenu");
+    const title = document.getElementById("title");
     const loginBtn = document.getElementById("loginBtn");
-    const signupBtn = document.getElementById("signupBtn");
-    const formTitle = document.getElementById("formTitle");
 
-    const translations = {
-      ar: { title: "تسجيل الدخول", login: "تسجيل الدخول", signup: "إنشاء حساب" },
-      en: { title: "Login", login: "Login", signup: "Sign Up" },
-      fr: { title: "Connexion", login: "Connexion", signup: "S'inscrire" },
-      es: { title: "Iniciar sesión", login: "Iniciar sesión", signup: "Registrarse" }
+    const placeholders = {
+      ar: ["البريد الإلكتروني", "كلمة المرور", "تسجيل الدخول"],
+      en: ["Email", "Password", "Login"],
+      fr: ["E-mail", "Mot de passe", "Connexion"],
+      es: ["Correo electrónico", "Contraseña", "Iniciar sesión"]
     };
 
-    langBtn.addEventListener("click", () => {
+    langBtn.onclick = () => {
       langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
-    });
+    };
 
     function setLanguage(lang) {
-      formTitle.textContent = translations[lang].title;
-      loginBtn.textContent = translations[lang].login;
-      signupBtn.textContent = translations[lang].signup;
-      localStorage.setItem("selectedLang", lang);
+      const inputs = document.querySelectorAll(".form input");
+      const t = placeholders[lang];
+      title.textContent = t[2];
+      loginBtn.textContent = t[2];
+      inputs.forEach((input, i) => input.placeholder = t[i]);
+      localStorage.setItem("lang", lang);
       langMenu.style.display = "none";
     }
 
-    const savedLang = localStorage.getItem("selectedLang") || "ar";
+    const savedLang = localStorage.getItem("lang") || "ar";
     setLanguage(savedLang);
 
-    function goToPage(page) {
-      window.location.href = page;
-    }
+    document.getElementById("loginBtn").onclick = () => {
+      const email = document.getElementById("email");
+      const pass = document.getElementById("password");
+      email.classList.remove("error");
+      pass.classList.remove("error");
+
+      if (email.value.trim() === "" || pass.value.trim() === "") {
+        if (email.value.trim() === "") email.classList.add("error");
+        if (pass.value.trim() === "") pass.classList.add("error");
+        alert("يرجى ملء جميع الخانات!");
+        return;
+      }
+
+      alert("تم تسجيل الدخول بنجاح ✅");
+    };
   </script>
 </body>
 </html>
