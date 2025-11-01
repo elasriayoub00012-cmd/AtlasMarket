@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Sellora - My Store</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Poppins",sans-serif;background:#fff;min-height:100vh}
+    header{background:#FFD700;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+    header .brand{font-weight:700;font-size:20px}
+    .lang-btn{background:#fff;border:1px solid #ccc;padding:8px 12px;border-radius:8px;cursor:pointer}
+    .container{max-width:1100px;margin:18px auto;padding:12px}
+    .store-header{display:flex;gap:20px;align-items:center}
+    .store-info{flex:1}
+    .store-title{font-size:28px;font-weight:700;margin:0}
+    .store-owner{color:#666;margin:6px 0}
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+    .card{border-radius:12px;overflow:hidden;border:1px solid #eee;box-shadow:0 6px 16px rgba(0,0,0,0.06);background:#fff}
+    .card img{width:100%;height:160px;object-fit:cover;display:block}
+    .card .body{padding:12px}
+    .card .title{font-weight:700;margin-bottom:8px}
+    .card .price{color:#007bff;font-weight:700}
+    .btn{display:inline-block;padding:10px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:700;color:#fff}
+    .btn.buy{background:#28a745}
+    .top-actions{display:flex;gap:10px}
+    /* mini cart */
+    #cart{position:fixed;right:18px;bottom:18px;background:#007bff;color:#fff;padding:12px;border-radius:10px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.2)}
+    .cart-popup{position:fixed;right:18px;bottom:70px;width:320px;background:#fff;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.2);display:none;overflow:hidden}
+    .cart-popup .head{padding:12px;border-bottom:1px solid #eee;font-weight:700}
+    .cart-popup .items{max-height:300px;overflow:auto;padding:10px}
+    .cart-popup .total{padding:12px;border-top:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+    .empty{color:#777;padding:12px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">Sellora</div>
+    <div>
+      <button class="lang-btn" id="langBtn">Langue</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="store-header">
+      <div class="store-info">
+        <h2 class="store-title" id="shopName">My Shop</h2>
+        <div class="store-owner" id="ownerName">Owner</div>
+        <div class="store-about" id="aboutText"></div>
+      </div>
+      <div class="top-actions">
+        <button class="btn" id="visitBtn" style="background:#007bff">Visit as customer</button>
+        <button class="btn" id="editBtn" style="background:#6c757d">Edit (future)</button>
+      </div>
+    </div>
+
+    <h3 style="margin-top:22px">Products</h3>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+
+  <div id="cart">Cart (0)</div>
+  <div class="cart-popup" id="cartPopup">
+    <div class="head">Cart</div>
+    <div class="items" id="cartItems"></div>
+    <div class="total"><div id="cartTotal">Total: $0</div><button class="btn buy" id="checkout">Checkout</button></div>
+  </div>
+
+<script>
+  // language simple
+  function getLang(){return localStorage.getItem('lang')||'ar'}
+  document.getElementById('langBtn').addEventListener('click', ()=>{
+    const m = prompt('Choose language: ar / en / fr / es', getLang());
+    if(!m) return;
+    localStorage.setItem('lang', m);
+    location.reload();
+  });
+
+  // load store (from current user)
+  const currentUser = JSON.parse(localStorage.getItem('sellora_current_user') || 'null');
+  const store = JSON.parse(localStorage.getItem('sellora_current_store') || 'null');
+
+  if(!currentUser || !store){
+    // try to load any store
+    // fallback: redirect to index
+    setTimeout(()=>{ alert('No store found. Returning to home'); window.location.href='index.html'; }, 500);
+  } else {
+    document.getElementById('shopName').innerText = store.shopName || store.title || 'My Shop';
+    document.getElementById('ownerName').innerText = 'Owner: ' + (store.ownerName || currentUser.name);
+    document.getElementById('aboutText').innerText = store.about || '';
+    // render products
+    renderProducts(store.products || []);
+  }
+
+  function renderProducts(products){
+    const grid = document.getElementById('productsGrid'); grid.innerHTML='';
+    products.forEach(p=>{
+      const div = document.createElement('div'); div.className='card';
+      div.innerHTML = `<img src="${p.img}" alt="${p.title}" />
+        <div class="body">
+          <div class="title">${p.title}</div>
+          <div class="price">$${p.price}</div>
+          <div style="margin-top:10px"><button class="btn buy" data-id="${p.id}">Add to cart</button></div>
+        </div>`;
+      grid.appendChild(div);
+    });
+    // attach listeners
+    document.querySelectorAll('.btn.buy').forEach(b=>{
+      b.addEventListener('click', ()=> {
+        const id = b.getAttribute('data-id');
+        const prod = products.find(x=>String(x.id)===String(id));
+        addToCart(prod);
+      });
+    });
+  }
+
+  // simple cart in localStorage
+  function getCart(){ return JSON.parse(localStorage.getItem('sellora_cart')||'[]'); }
+  function saveCart(c){ localStorage.setItem('sellora_cart', JSON.stringify(c)); updateCartUI(); }
+  function addToCart(prod){
+    const cart = getCart();
+    const existing = cart.find(i=> i.id===prod.id);
+    if(existing) existing.qty++;
+    else cart.push({id:prod.id,title:prod.title,price:prod.price,img:prod.img,qty:1});
+    saveCart(cart);
+  }
+  function updateCartUI(){
+    const cart = getCart();
+    document.getElementById('cart').innerText = `Cart (${cart.reduce((s,i)=>s+i.qty,0)})`;
+    const popup = document.getElementById('cartPopup');
+    const items = document.getElementById('cartItems'); items.innerHTML='';
+    if(cart.length===0){ items.innerHTML = '<div class="empty">Cart is empty</div>'; document.getElementById('cartTotal').innerText='Total: $0'; return; }
+    let total=0;
+    cart.forEach(it=>{
+      total += it.price*it.qty;
+      const el = document.createElement('div'); el.style.display='flex'; el.style.justifyContent='space-between'; el.style.alignItems='center'; el.style.marginBottom='8px';
+      el.innerHTML = `<div style="flex:1"><div style="font-weight:700">${it.title}</div><div style="color:#666;font-size:13px">${it.qty} × $${it.price}</div></div>
+        <div style="margin-left:8px">
+          <button data-id="${it.id}" class="qtyminus">-</button>
+          <button data-id="${it.id}" class="qtyplus">+</button>
+        </div>`;
+      items.appendChild(el);
+    });
+    document.getElementById('cartTotal').innerText = 'Total: $' + total;
+    // attach qty handlers
+    document.querySelectorAll('.qtyplus').forEach(b=> b.addEventListener('click', ()=> {
+      const id = Number(b.dataset.id); const c = getCart(); const it = c.find(x=>x.id===id); if(it){ it.qty++; saveCart(c); }
+    }));
+    document.querySelectorAll('.qtyminus').forEach(b=> b.addEventListener('click', ()=> {
+      const id = Number(b.dataset.id); const c = getCart(); const it = c.find(x=>x.id===id); if(it){ it.qty--; if(it.qty<=0) { const idx=c.indexOf(it); c.splice(idx,1); } saveCart(c); }
+    }));
+  }
+
+  document.getElementById('cart').addEventListener('click', ()=>{
+    const pop = document.getElementById('cartPopup');
+    pop.style.display = pop.style.display==='block' ? 'none' : 'block';
+    updateCartUI();
+  });
+
+  document.getElementById('checkout').addEventListener('click', ()=>{
+    alert('Checkout simulated — thank you!');
+    localStorage.removeItem('sellora_cart'); updateCartUI(); document.getElementById('cartPopup').style.display='none';
+  });
+
+  document.getElementById('visitBtn').addEventListener('click', ()=> {
+    // scroll to products (just keep same page)
+    window.scrollTo({top:document.getElementById('productsGrid').offsetTop-20,behavior:'smooth'});
+  });
+
+  // provide editBtn handler placeholder
+  document.getElementById('editBtn').addEventListener('click', ()=> {
+    alert('Edit store (coming soon)');
+  });
+
+</script>
+</body>
+</html>
