@@ -22,8 +22,15 @@
       top: 15px;
       left: 20px;
       font-weight: bold;
-      font-size: 26px;
+      font-size: 24px;
       color: #222;
+    }
+
+    h1 {
+      font-size: 60px;
+      font-weight: 300;
+      color: #000;
+      margin-bottom: 40px;
     }
 
     .language-btn {
@@ -102,7 +109,7 @@
 <body>
   <header>Sellora</header>
 
-  <button class="language-btn" id="langBtn">Langue</button>
+  <button class="language-btn" id="langBtn">Lange</button>
 
   <div class="language-menu" id="langMenu">
     <button onclick="setLanguage('ar')">العربية</button>
@@ -111,9 +118,11 @@
     <button onclick="setLanguage('es')">Español</button>
   </div>
 
+  <h1 id="mainTitle">Sellora</h1>
+
   <div class="buttons">
-    <button id="signupBtn" class="action">اشتراك</button>
-    <button id="loginBtn" class="action">تسجيل الدخول</button>
+    <button id="signupBtn" class="action" onclick="goToPage('signup.html')">اشتراك</button>
+    <button id="loginBtn" class="action" onclick="goToPage('login.html')">تسجيل الدخول</button>
   </div>
 
   <script>
@@ -121,12 +130,13 @@
     const langMenu = document.getElementById("langMenu");
     const signupBtn = document.getElementById("signupBtn");
     const loginBtn = document.getElementById("loginBtn");
+    const mainTitle = document.getElementById("mainTitle");
 
     const translations = {
-      ar: { signup: "اشتراك", login: "تسجيل الدخول", lang: "اللغة" },
-      en: { signup: "Sign Up", login: "Login", lang: "Language" },
-      fr: { signup: "S'inscrire", login: "Connexion", lang: "Langue" },
-      es: { signup: "Registrarse", login: "Iniciar sesión", lang: "Idioma" }
+      ar: { signup: "اشتراك", login: "تسجيل الدخول", lang: "اللغة", title: "سيلورا" },
+      en: { signup: "Sign Up", login: "Login", lang: "Language", title: "Sellora" },
+      fr: { signup: "S'inscrire", login: "Connexion", lang: "Langue", title: "Sellora" },
+      es: { signup: "Registrarse", login: "Iniciar sesión", lang: "Idioma", title: "Sellora" }
     };
 
     langBtn.addEventListener("click", () => {
@@ -136,7 +146,8 @@
     function setLanguage(lang) {
       signupBtn.textContent = translations[lang].signup;
       loginBtn.textContent = translations[lang].login;
-      langBtn.textContent = translations[lang].lang;
+      langBtn.textContent = "Lange";
+      mainTitle.textContent = translations[lang].title;
       langMenu.style.display = "none";
       localStorage.setItem("selectedLang", lang);
     }
@@ -144,6 +155,11 @@
     // تحميل اللغة المختارة سابقاً
     const savedLang = localStorage.getItem("selectedLang") || "ar";
     setLanguage(savedLang);
+
+    // التنقل بين الصفحات
+    function goToPage(page) {
+      window.location.href = page;
+    }
   </script>
 </body>
 </html>
