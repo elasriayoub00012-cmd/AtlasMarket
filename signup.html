@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>إنشاء حساب - Sellora</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: "Poppins", sans-serif;
-      background-color: #FFD700; /* خلفية صفراء */
+      background-color: #FFD700;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -89,6 +89,8 @@
       background: white;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 10;
+      border: 1px solid #ccc;
     }
 
     .language-menu button {
@@ -120,10 +122,10 @@
   <h1 id="formTitle">إنشاء حساب</h1>
 
   <form id="signupForm">
-    <input type="text" id="name" placeholder="الاسم الكامل" required>
-    <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-    <input type="password" id="password" placeholder="كلمة المرور" required>
-    <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+    <input type="text" id="name" placeholder="الاسم الكامل" required />
+    <input type="email" id="email" placeholder="البريد الإلكتروني" required />
+    <input type="password" id="password" placeholder="كلمة المرور" required />
+    <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required />
     <button id="signupBtn" type="submit">إنشاء حساب</button>
     <button id="loginBtn" type="button" onclick="goToPage('login.html')">تسجيل الدخول</button>
   </form>
@@ -135,11 +137,48 @@
     const loginBtn = document.getElementById("loginBtn");
     const formTitle = document.getElementById("formTitle");
 
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const confirmInput = document.getElementById("confirmPassword");
+
     const translations = {
-      ar: { title: "إنشاء حساب", signup: "إنشاء حساب", login: "تسجيل الدخول" },
-      en: { title: "Sign Up", signup: "Sign Up", login: "Login" },
-      fr: { title: "Créer un compte", signup: "S'inscrire", login: "Connexion" },
-      es: { title: "Crear cuenta", signup: "Registrarse", login: "Iniciar sesión" }
+      ar: {
+        title: "إنشاء حساب",
+        signup: "إنشاء حساب",
+        login: "تسجيل الدخول",
+        name: "الاسم الكامل",
+        email: "البريد الإلكتروني",
+        password: "كلمة المرور",
+        confirm: "تأكيد كلمة المرور"
+      },
+      en: {
+        title: "Sign Up",
+        signup: "Sign Up",
+        login: "Login",
+        name: "Full Name",
+        email: "Email Address",
+        password: "Password",
+        confirm: "Confirm Password"
+      },
+      fr: {
+        title: "Créer un compte",
+        signup: "S'inscrire",
+        login: "Connexion",
+        name: "Nom complet",
+        email: "Adresse e-mail",
+        password: "Mot de passe",
+        confirm: "Confirmer le mot de passe"
+      },
+      es: {
+        title: "Crear cuenta",
+        signup: "Registrarse",
+        login: "Iniciar sesión",
+        name: "Nombre completo",
+        email: "Correo electrónico",
+        password: "Contraseña",
+        confirm: "Confirmar contraseña"
+      }
     };
 
     langBtn.addEventListener("click", () => {
@@ -147,9 +186,17 @@
     });
 
     function setLanguage(lang) {
-      formTitle.textContent = translations[lang].title;
-      signupBtn.textContent = translations[lang].signup;
-      loginBtn.textContent = translations[lang].login;
+      const t = translations[lang];
+      formTitle.textContent = t.title;
+      signupBtn.textContent = t.signup;
+      loginBtn.textContent = t.login;
+
+      // placeholders
+      nameInput.placeholder = t.name;
+      emailInput.placeholder = t.email;
+      passwordInput.placeholder = t.password;
+      confirmInput.placeholder = t.confirm;
+
       localStorage.setItem("selectedLang", lang);
       langMenu.style.display = "none";
     }
