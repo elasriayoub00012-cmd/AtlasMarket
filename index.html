@@ -1,116 +1,92 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sellora</title>
   <style>
     body {
       margin: 0;
       padding: 0;
+      background: #FFD700;
       font-family: "Poppins", sans-serif;
       height: 100vh;
-      background-color: #FFD700; /* خلفية صفراء */
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-
     header {
       position: absolute;
       top: 15px;
       left: 20px;
       font-weight: bold;
-      font-size: 24px;
-      color: #222;
-    }
-
-    h1 {
-      font-size: 60px;
-      font-weight: 300;
+      font-size: 26px;
       color: #000;
-      margin-bottom: 40px;
     }
-
     .language-btn {
       position: absolute;
       top: 15px;
       right: 20px;
       background: white;
-      border: none;
+      border: 1px solid #ccc;
       padding: 8px 15px;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
+      color: #000;
     }
-
     .language-menu {
       display: none;
       position: absolute;
       top: 55px;
       right: 20px;
       background: white;
+      border: 1px solid #ccc;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      z-index: 10;
     }
-
     .language-menu button {
       width: 100%;
-      color: black;
       background: none;
       border: none;
       text-align: left;
       padding: 10px 15px;
       cursor: pointer;
+      color: #000;
       font-size: 16px;
     }
-
     .language-menu button:hover {
       background: #f0f0f0;
     }
-
+    h1 {
+      font-size: 40px;
+      font-weight: 400;
+      margin-bottom: 50px;
+    }
     .buttons {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 20px;
     }
-
-    button.action {
-      width: 180px;
-      height: 50px;
-      border: none;
+    .btn {
+      width: 230px;
+      padding: 15px;
+      border-radius: 8px;
       color: white;
+      border: none;
       font-size: 18px;
-      font-weight: bold;
-      border-radius: 12px;
       cursor: pointer;
-      transition: 0.3s;
+      font-weight: bold;
     }
-
-    #signupBtn {
-      background-color: red;
-    }
-
-    #signupBtn:hover {
-      background-color: #cc0000;
-    }
-
-    #loginBtn {
-      background-color: #007bff;
-    }
-
-    #loginBtn:hover {
-      background-color: #0056b3;
-    }
+    .signup { background: red; }
+    .login { background: #007bff; }
   </style>
 </head>
 <body>
   <header>Sellora</header>
 
-  <button class="language-btn" id="langBtn">Lange</button>
-
+  <button class="language-btn" id="langBtn">Langue</button>
   <div class="language-menu" id="langMenu">
     <button onclick="setLanguage('ar')">العربية</button>
     <button onclick="setLanguage('en')">English</button>
@@ -118,11 +94,11 @@
     <button onclick="setLanguage('es')">Español</button>
   </div>
 
-  <h1 id="mainTitle">Sellora</h1>
+  <h1 id="title">Sellora</h1>
 
   <div class="buttons">
-    <button id="signupBtn" class="action" onclick="goToPage('signup.html')">اشتراك</button>
-    <button id="loginBtn" class="action" onclick="goToPage('login.html')">تسجيل الدخول</button>
+    <button class="btn signup" id="signupBtn" onclick="goTo('signup.html')">إنشاء حساب</button>
+    <button class="btn login" id="loginBtn" onclick="goTo('login.html')">تسجيل الدخول</button>
   </div>
 
   <script>
@@ -130,36 +106,33 @@
     const langMenu = document.getElementById("langMenu");
     const signupBtn = document.getElementById("signupBtn");
     const loginBtn = document.getElementById("loginBtn");
-    const mainTitle = document.getElementById("mainTitle");
+    const title = document.getElementById("title");
 
     const translations = {
-      ar: { signup: "اشتراك", login: "تسجيل الدخول", lang: "اللغة", title: "سيلورا" },
-      en: { signup: "Sign Up", login: "Login", lang: "Language", title: "Sellora" },
-      fr: { signup: "S'inscrire", login: "Connexion", lang: "Langue", title: "Sellora" },
-      es: { signup: "Registrarse", login: "Iniciar sesión", lang: "Idioma", title: "Sellora" }
+      ar: { signup: "إنشاء حساب", login: "تسجيل الدخول" },
+      en: { signup: "Sign Up", login: "Login" },
+      fr: { signup: "S'inscrire", login: "Connexion" },
+      es: { signup: "Registrarse", login: "Iniciar sesión" }
     };
 
-    langBtn.addEventListener("click", () => {
+    langBtn.onclick = () => {
       langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
-    });
+    };
 
     function setLanguage(lang) {
-      signupBtn.textContent = translations[lang].signup;
-      loginBtn.textContent = translations[lang].login;
-      langBtn.textContent = "Lange";
-      mainTitle.textContent = translations[lang].title;
+      const t = translations[lang];
+      signupBtn.textContent = t.signup;
+      loginBtn.textContent = t.login;
+      localStorage.setItem("lang", lang);
       langMenu.style.display = "none";
-      localStorage.setItem("selectedLang", lang);
     }
 
-    // تحميل اللغة المختارة سابقاً
-    const savedLang = localStorage.getItem("selectedLang") || "ar";
-    setLanguage(savedLang);
-
-    // التنقل بين الصفحات
-    function goToPage(page) {
+    function goTo(page) {
       window.location.href = page;
     }
+
+    const savedLang = localStorage.getItem("lang") || "ar";
+    setLanguage(savedLang);
   </script>
 </body>
 </html>
