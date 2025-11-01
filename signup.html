@@ -69,18 +69,22 @@
       background-color: #007bff;
     }
 
+    /* زر اللغات */
     .language-btn {
       position: absolute;
       top: 15px;
       right: 20px;
       background: white;
-      border: none;
+      border: 1px solid #ccc;
       padding: 8px 15px;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
+      color: #000; /* باش الكلمة تبان */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
+    /* المربع ديال اللغات */
     .language-menu {
       display: none;
       position: absolute;
@@ -101,6 +105,7 @@
       padding: 10px 15px;
       cursor: pointer;
       font-size: 16px;
+      color: #000; /* النص ديال اللغات يكون أسود باش يبان */
     }
 
     .language-menu button:hover {
@@ -190,13 +195,10 @@
       formTitle.textContent = t.title;
       signupBtn.textContent = t.signup;
       loginBtn.textContent = t.login;
-
-      // placeholders
       nameInput.placeholder = t.name;
       emailInput.placeholder = t.email;
       passwordInput.placeholder = t.password;
       confirmInput.placeholder = t.confirm;
-
       localStorage.setItem("selectedLang", lang);
       langMenu.style.display = "none";
     }
