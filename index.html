@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sellora</title>
   <style>
     body {
@@ -10,16 +10,11 @@
       padding: 0;
       font-family: "Poppins", sans-serif;
       height: 100vh;
-      background-color: #FFD700; /* أصفر */
-      background-image: url("https://i.ibb.co/n6dpxc2/yellow-pattern.png");
-      background-repeat: repeat;
-      background-size: 120px;
-      background-attachment: fixed;
+      background-color: #FFD700; /* خلفية صفراء */
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      position: relative;
+      flex-direction: column;
     }
 
     header {
@@ -41,13 +36,32 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
-    .language-btn img {
-      width: 18px;
+    .language-menu {
+      display: none;
+      position: absolute;
+      top: 55px;
+      right: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+
+    .language-menu button {
+      width: 100%;
+      color: black;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .language-menu button:hover {
+      background: #f0f0f0;
     }
 
     .buttons {
@@ -56,7 +70,7 @@
       gap: 15px;
     }
 
-    button {
+    button.action {
       width: 180px;
       height: 50px;
       border: none;
@@ -83,39 +97,12 @@
     #loginBtn:hover {
       background-color: #0056b3;
     }
-
-    /* قائمة اللغات */
-    .language-menu {
-      display: none;
-      position: absolute;
-      top: 55px;
-      right: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-
-    .language-menu button {
-      width: 100%;
-      color: black;
-      background: none;
-      text-align: left;
-      padding: 10px 15px;
-      border-radius: 0;
-      font-size: 16px;
-    }
-
-    .language-menu button:hover {
-      background: #f0f0f0;
-    }
   </style>
 </head>
 <body>
   <header>Sellora</header>
 
-  <button class="language-btn" id="langBtn">
-    🌐 Languages
-  </button>
+  <button class="language-btn" id="langBtn">Langue</button>
 
   <div class="language-menu" id="langMenu">
     <button onclick="setLanguage('ar')">العربية</button>
@@ -125,22 +112,38 @@
   </div>
 
   <div class="buttons">
-    <button id="signupBtn" onclick="window.location.href='signup.html'">Sign Up</button>
-    <button id="loginBtn" onclick="window.location.href='login.html'">Login</button>
+    <button id="signupBtn" class="action">اشتراك</button>
+    <button id="loginBtn" class="action">تسجيل الدخول</button>
   </div>
 
   <script>
     const langBtn = document.getElementById("langBtn");
     const langMenu = document.getElementById("langMenu");
+    const signupBtn = document.getElementById("signupBtn");
+    const loginBtn = document.getElementById("loginBtn");
+
+    const translations = {
+      ar: { signup: "اشتراك", login: "تسجيل الدخول", lang: "اللغة" },
+      en: { signup: "Sign Up", login: "Login", lang: "Language" },
+      fr: { signup: "S'inscrire", login: "Connexion", lang: "Langue" },
+      es: { signup: "Registrarse", login: "Iniciar sesión", lang: "Idioma" }
+    };
 
     langBtn.addEventListener("click", () => {
       langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
     });
 
     function setLanguage(lang) {
-      alert("🔄 اللغة ستتغير إلى: " + lang);
+      signupBtn.textContent = translations[lang].signup;
+      loginBtn.textContent = translations[lang].login;
+      langBtn.textContent = translations[lang].lang;
       langMenu.style.display = "none";
+      localStorage.setItem("selectedLang", lang);
     }
+
+    // تحميل اللغة المختارة سابقاً
+    const savedLang = localStorage.getItem("selectedLang") || "ar";
+    setLanguage(savedLang);
   </script>
 </body>
 </html>
