@@ -1,75 +1,29 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>إنشاء حساب - Sellora</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sellora - Sign Up</title>
   <style>
     body {
       margin: 0;
       padding: 0;
+      background: #FFD700;
       font-family: "Poppins", sans-serif;
-      background-color: #FFD700;
       height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
-
     header {
       position: absolute;
       top: 15px;
       left: 20px;
       font-weight: bold;
-      font-size: 24px;
-      color: #222;
-    }
-
-    h1 {
-      font-size: 40px;
-      font-weight: 400;
-      margin-bottom: 30px;
+      font-size: 26px;
       color: #000;
     }
-
-    form {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      display: flex;
-      flex-direction: column;
-      width: 300px;
-      gap: 15px;
-    }
-
-    input {
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-    }
-
-    button {
-      border: none;
-      color: white;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 17px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    #signupBtn {
-      background-color: red;
-    }
-
-    #loginBtn {
-      background-color: #007bff;
-    }
-
-    /* زر اللغات */
     .language-btn {
       position: absolute;
       top: 15px;
@@ -80,23 +34,18 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
-      color: #000; /* باش الكلمة تبان */
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      color: #000;
     }
-
-    /* المربع ديال اللغات */
     .language-menu {
       display: none;
       position: absolute;
       top: 55px;
       right: 20px;
       background: white;
+      border: 1px solid #ccc;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      z-index: 10;
-      border: 1px solid #ccc;
     }
-
     .language-menu button {
       width: 100%;
       background: none;
@@ -104,19 +53,77 @@
       text-align: left;
       padding: 10px 15px;
       cursor: pointer;
+      color: #000;
       font-size: 16px;
-      color: #000; /* النص ديال اللغات يكون أسود باش يبان */
     }
-
     .language-menu button:hover {
       background: #f0f0f0;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 500;
+      margin-top: 80px;
+      margin-bottom: 25px;
+    }
+    .form {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      width: 85%;
+      max-width: 350px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .form input.error {
+      border: 2px solid red;
+    }
+    .form button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      border: none;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .submit {
+      background: red;
+      margin-bottom: 10px;
+    }
+    .login {
+      background: #007bff;
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    .nav-buttons button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 12px;
+      background: #000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <header>Sellora</header>
 
-  <button class="language-btn" id="langBtn">Lange</button>
+  <button class="language-btn" id="langBtn">Langue</button>
   <div class="language-menu" id="langMenu">
     <button onclick="setLanguage('ar')">العربية</button>
     <button onclick="setLanguage('en')">English</button>
@@ -124,91 +131,71 @@
     <button onclick="setLanguage('es')">Español</button>
   </div>
 
-  <h1 id="formTitle">إنشاء حساب</h1>
+  <h1 id="title">إنشاء حساب</h1>
 
-  <form id="signupForm">
-    <input type="text" id="name" placeholder="الاسم الكامل" required />
-    <input type="email" id="email" placeholder="البريد الإلكتروني" required />
-    <input type="password" id="password" placeholder="كلمة المرور" required />
-    <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required />
-    <button id="signupBtn" type="submit">إنشاء حساب</button>
-    <button id="loginBtn" type="button" onclick="goToPage('login.html')">تسجيل الدخول</button>
-  </form>
+  <div class="form">
+    <input id="name" placeholder="الاسم الكامل">
+    <input id="shop" placeholder="اسم المتجر">
+    <input id="email" placeholder="البريد الإلكتروني">
+    <input id="password" type="password" placeholder="كلمة المرور">
+    <input id="confirm" type="password" placeholder="تأكيد كلمة المرور">
+    <button class="submit" id="createBtn">إنشاء حساب</button>
+    <button class="login" onclick="window.location.href='login.html'">تسجيل الدخول</button>
+  </div>
+
+  <div class="nav-buttons" style="display:none;" id="afterForm">
+    <button onclick="back()">عودة</button>
+    <button onclick="next()">التالي</button>
+  </div>
 
   <script>
     const langBtn = document.getElementById("langBtn");
     const langMenu = document.getElementById("langMenu");
-    const signupBtn = document.getElementById("signupBtn");
-    const loginBtn = document.getElementById("loginBtn");
-    const formTitle = document.getElementById("formTitle");
+    const title = document.getElementById("title");
+    const createBtn = document.getElementById("createBtn");
 
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const confirmInput = document.getElementById("confirmPassword");
-
-    const translations = {
-      ar: {
-        title: "إنشاء حساب",
-        signup: "إنشاء حساب",
-        login: "تسجيل الدخول",
-        name: "الاسم الكامل",
-        email: "البريد الإلكتروني",
-        password: "كلمة المرور",
-        confirm: "تأكيد كلمة المرور"
-      },
-      en: {
-        title: "Sign Up",
-        signup: "Sign Up",
-        login: "Login",
-        name: "Full Name",
-        email: "Email Address",
-        password: "Password",
-        confirm: "Confirm Password"
-      },
-      fr: {
-        title: "Créer un compte",
-        signup: "S'inscrire",
-        login: "Connexion",
-        name: "Nom complet",
-        email: "Adresse e-mail",
-        password: "Mot de passe",
-        confirm: "Confirmer le mot de passe"
-      },
-      es: {
-        title: "Crear cuenta",
-        signup: "Registrarse",
-        login: "Iniciar sesión",
-        name: "Nombre completo",
-        email: "Correo electrónico",
-        password: "Contraseña",
-        confirm: "Confirmar contraseña"
-      }
+    const placeholders = {
+      ar: ["الاسم الكامل", "اسم المتجر", "البريد الإلكتروني", "كلمة المرور", "تأكيد كلمة المرور", "إنشاء حساب"],
+      en: ["Full Name", "Store Name", "Email", "Password", "Confirm Password", "Create Account"],
+      fr: ["Nom complet", "Nom du magasin", "E-mail", "Mot de passe", "Confirmer le mot de passe", "Créer un compte"],
+      es: ["Nombre completo", "Nombre de tienda", "Correo electrónico", "Contraseña", "Confirmar contraseña", "Crear cuenta"]
     };
 
-    langBtn.addEventListener("click", () => {
+    langBtn.onclick = () => {
       langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
-    });
+    };
 
     function setLanguage(lang) {
-      const t = translations[lang];
-      formTitle.textContent = t.title;
-      signupBtn.textContent = t.signup;
-      loginBtn.textContent = t.login;
-      nameInput.placeholder = t.name;
-      emailInput.placeholder = t.email;
-      passwordInput.placeholder = t.password;
-      confirmInput.placeholder = t.confirm;
-      localStorage.setItem("selectedLang", lang);
+      const inputs = document.querySelectorAll(".form input");
+      const t = placeholders[lang];
+      title.textContent = t[5];
+      createBtn.textContent = t[5];
+      inputs.forEach((input, i) => input.placeholder = t[i]);
+      localStorage.setItem("lang", lang);
       langMenu.style.display = "none";
     }
 
-    const savedLang = localStorage.getItem("selectedLang") || "ar";
+    const savedLang = localStorage.getItem("lang") || "ar";
     setLanguage(savedLang);
 
-    function goToPage(page) {
-      window.location.href = page;
-    }
+    document.getElementById("createBtn").onclick = () => {
+      let valid = true;
+      document.querySelectorAll(".form input").forEach(i => {
+        i.classList.remove("error");
+        if (i.value.trim() === "") {
+          i.classList.add("error");
+          valid = false;
+        }
+      });
+      if (!valid) return alert("يرجى ملء جميع الخانات!");
+
+      document.querySelector(".form").style.display = "none";
+      title.textContent = "أسئلة اختيارية";
+      document.getElementById("afterForm").style.display = "flex";
+    };
+
+    function back() { window.location.href = "index.html"; }
+    function next() { alert("تم الانتقال للخطوة التالية ✅"); }
   </script>
 </body>
 </html>
