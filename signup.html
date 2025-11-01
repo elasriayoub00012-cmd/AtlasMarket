@@ -1,201 +1,374 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sellora - Sign Up</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sellora - Signup</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #FFD700;
-      font-family: "Poppins", sans-serif;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
-    header {
-      position: absolute;
-      top: 15px;
-      left: 20px;
-      font-weight: bold;
-      font-size: 26px;
-      color: #000;
-    }
-    .language-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      background: white;
-      border: 1px solid #ccc;
-      padding: 8px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      color: #000;
-    }
-    .language-menu {
-      display: none;
-      position: absolute;
-      top: 55px;
-      right: 20px;
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-    .language-menu button {
-      width: 100%;
-      background: none;
-      border: none;
-      text-align: left;
-      padding: 10px 15px;
-      cursor: pointer;
-      color: #000;
-      font-size: 16px;
-    }
-    .language-menu button:hover {
-      background: #f0f0f0;
-    }
-    h1 {
-      font-size: 32px;
-      font-weight: 500;
-      margin-top: 80px;
-      margin-bottom: 25px;
-    }
-    .form {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      width: 85%;
-      max-width: 350px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .form input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    .form input.error {
-      border: 2px solid red;
-    }
-    .form button {
-      width: 100%;
-      padding: 14px;
-      border-radius: 8px;
-      border: none;
-      color: white;
-      font-size: 17px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .submit {
-      background: red;
-      margin-bottom: 10px;
-    }
-    .login {
-      background: #007bff;
-    }
-    .nav-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 15px;
-    }
-    .nav-buttons button {
-      flex: 1;
-      margin: 0 5px;
-      padding: 12px;
-      background: #000;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: bold;
-    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Poppins",sans-serif;background:#FFD700;height:100vh;display:flex;flex-direction:column;align-items:center}
+    header{position:absolute;left:20px;top:15px;font-weight:700;font-size:22px}
+    .lang-btn{position:absolute;right:20px;top:15px;background:#fff;border:1px solid #ccc;padding:8px 12px;border-radius:8px;cursor:pointer;color:#000;font-weight:600}
+    .lang-menu{display:none;position:absolute;right:20px;top:55px;background:#fff;border:1px solid #ccc;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+    .lang-menu button{display:block;width:100%;padding:10px 14px;border:none;background:none;text-align:left;cursor:pointer;color:#000}
+    main{width:100%;max-width:420px;margin-top:90px;padding:20px}
+    .card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 6px 18px rgba(0,0,0,0.15)}
+    h1{text-align:center;font-weight:300;margin:0 0 18px 0;font-size:32px}
+    input{width:100%;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:15px;margin-bottom:12px}
+    input.error{border:2px solid red}
+    .btn{width:100%;padding:12px;border-radius:8px;border:none;color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+    .btn.red{background:#d40000;margin-bottom:8px}
+    .btn.blue{background:#007bff}
+    .small{font-size:14px;color:#333;text-align:center;margin-top:8px}
+    .steps{display:none;margin-top:12px}
+    .choices{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+    .choice{padding:10px;border-radius:8px;border:1px solid #ddd;cursor:pointer}
+    .choice.selected{background:#007bff;color:#fff;border-color:#007bff}
+    .nav{display:flex;gap:10px;margin-top:14px}
+    .nav button{flex:1;padding:10px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+    .nav .back{background:#fff;border:1px solid #aaa}
+    .nav .next{background:#000;color:#fff}
+    .hidden{display:none}
+    .msg{color:red;font-weight:700;margin-bottom:8px;text-align:center}
   </style>
 </head>
 <body>
   <header>Sellora</header>
-
-  <button class="language-btn" id="langBtn">Langue</button>
-  <div class="language-menu" id="langMenu">
-    <button onclick="setLanguage('ar')">العربية</button>
-    <button onclick="setLanguage('en')">English</button>
-    <button onclick="setLanguage('fr')">Français</button>
-    <button onclick="setLanguage('es')">Español</button>
+  <button class="lang-btn" id="langBtn">Langue</button>
+  <div class="lang-menu" id="langMenu">
+    <button data-lang="ar">العربية</button>
+    <button data-lang="en">English</button>
+    <button data-lang="fr">Français</button>
+    <button data-lang="es">Español</button>
   </div>
 
-  <h1 id="title">إنشاء حساب</h1>
+  <main>
+    <div class="card" id="signupCard">
+      <h1 id="title">إنشاء حساب</h1>
+      <div class="msg hidden" id="msg"></div>
 
-  <div class="form">
-    <input id="name" placeholder="الاسم الكامل">
-    <input id="shop" placeholder="اسم المتجر">
-    <input id="email" placeholder="البريد الإلكتروني">
-    <input id="password" type="password" placeholder="كلمة المرور">
-    <input id="confirm" type="password" placeholder="تأكيد كلمة المرور">
-    <button class="submit" id="createBtn">إنشاء حساب</button>
-    <button class="login" onclick="window.location.href='login.html'">تسجيل الدخول</button>
-  </div>
+      <input id="name" placeholder="الاسم الكامل" />
+      <input id="shop" placeholder="اسم المتجر" />
+      <input id="email" placeholder="البريد الإلكتروني" />
+      <input id="password" type="password" placeholder="كلمة المرور" />
+      <input id="confirm" type="password" placeholder="تأكيد كلمة المرور" />
 
-  <div class="nav-buttons" style="display:none;" id="afterForm">
-    <button onclick="back()">عودة</button>
-    <button onclick="next()">التالي</button>
-  </div>
+      <button class="btn red" id="createBtn">إنشاء حساب</button>
+      <button class="btn blue" id="toLoginBtn">تسجيل الدخول</button>
+      <p class="small" id="hint">سوف نسألك بعض الأسئلة الاختيارية بعد إنشاء الحساب.</p>
+    </div>
 
-  <script>
-    const langBtn = document.getElementById("langBtn");
-    const langMenu = document.getElementById("langMenu");
-    const title = document.getElementById("title");
-    const createBtn = document.getElementById("createBtn");
+    <!-- خطوات الأسئلة الاختيارية -->
+    <div class="card steps" id="stepsCard">
+      <h1 id="stepTitle">أسئلة</h1>
 
-    const placeholders = {
-      ar: ["الاسم الكامل", "اسم المتجر", "البريد الإلكتروني", "كلمة المرور", "تأكيد كلمة المرور", "إنشاء حساب"],
-      en: ["Full Name", "Store Name", "Email", "Password", "Confirm Password", "Create Account"],
-      fr: ["Nom complet", "Nom du magasin", "E-mail", "Mot de passe", "Confirmer le mot de passe", "Créer un compte"],
-      es: ["Nombre completo", "Nombre de tienda", "Correo electrónico", "Contraseña", "Confirmar contraseña", "Crear cuenta"]
-    };
+      <!-- step 1 -->
+      <div class="step" id="step1">
+        <p><strong id="q1">من أين سمعت عنا؟</strong></p>
+        <div class="choices" id="choices1">
+          <div class="choice" data-val="friend">من صديق</div>
+          <div class="choice" data-val="social">مواقع التواصل الاجتماعي (Facebook/Instagram/TikTok)</div>
+          <div class="choice" data-val="search">محركات البحث</div>
+          <div class="choice" data-val="ads">إعلان/منشور مدفوع</div>
+          <div class="choice" data-val="other">مصدر آخر</div>
+        </div>
+      </div>
 
-    langBtn.onclick = () => {
-      langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
-    };
+      <!-- step 2 -->
+      <div class="step hidden" id="step2">
+        <p><strong id="q2">ما هدفك من إنشاء المتجر على Sellora؟</strong></p>
+        <div class="choices" id="choices2">
+          <div class="choice" data-val="personal">بيع منتجات شخصية / صنع يدوي</div>
+          <div class="choice" data-val="retail">متجر تجزئة</div>
+          <div class="choice" data-val="events">بيع في فعاليات ومعارض</div>
+          <div class="choice" data-val="social">بيع عبر وسائل التواصل الاجتماعي</div>
+          <div class="choice" data-val="market">قصد الإدراج في الأسواق (Etsy/Amazon)</div>
+        </div>
+      </div>
 
-    function setLanguage(lang) {
-      const inputs = document.querySelectorAll(".form input");
-      const t = placeholders[lang];
-      title.textContent = t[5];
-      createBtn.textContent = t[5];
-      inputs.forEach((input, i) => input.placeholder = t[i]);
-      localStorage.setItem("lang", lang);
-      langMenu.style.display = "none";
+      <!-- step 3 -->
+      <div class="step hidden" id="step3">
+        <p><strong id="q3">ماذا تخطط لبيع في متجرك؟ (اختر ما يناسب)</strong></p>
+        <div class="choices" id="choices3">
+          <div class="choice" data-val="physical">منتجات مادية (ساعات، ملابس، أكسسوارات)</div>
+          <div class="choice" data-val="digital">منتجات رقمية (موسيقى، فن رقمي)</div>
+          <div class="choice" data-val="dropship">دروبشيبينغ</div>
+          <div class="choice" data-val="services">خدمات (تدريب، استشارات)</div>
+          <div class="choice" data-val="print">طباعة حسب الطلب</div>
+          <div class="choice" data-val="food">أغذية وبقالة</div>
+          <div class="choice" data-val="electronics">إلكترونيات</div>
+          <div class="choice" data-val="books">كتب ومواد تعليمية</div>
+          <div class="choice" data-val="beauty">مستحضرات تجميل</div>
+          <div class="choice" data-val="other">سأقرر لاحقاً</div>
+        </div>
+      </div>
+
+      <div class="nav" id="navBtns">
+        <button class="back" id="backBtn">عودة</button>
+        <button class="next" id="nextBtn">التالي</button>
+      </div>
+    </div>
+  </main>
+
+<script>
+  // --- LANG
+  const langBtn = document.getElementById('langBtn');
+  const langMenu = document.getElementById('langMenu');
+  const langButtons = langMenu.querySelectorAll('button');
+
+  langBtn.addEventListener('click', ()=> {
+    langMenu.style.display = langMenu.style.display === 'block' ? 'none' : 'block';
+  });
+
+  langButtons.forEach(b=>{
+    b.addEventListener('click', ()=> {
+      const lang = b.dataset.lang || b.getAttribute('data-lang') || b.innerText;
+      // normalize: we added dataset attr in HTML but safe
+      const code = b.getAttribute('data-lang') || (b.innerText==='العربية'?'ar': b.innerText==='Français'?'fr': b.innerText==='Español'?'es':'en');
+      setLanguage(code);
+      langMenu.style.display='none';
+    });
+  });
+
+  // translations (small)
+  const T = {
+    ar: {
+      title: "إنشاء حساب", hint:"سوف نسألك بعض الأسئلة الاختيارية بعد إنشاء الحساب.",
+      name:"الاسم الكامل", shop:"اسم المتجر", email:"البريد الإلكتروني", password:"كلمة المرور", confirm:"تأكيد كلمة المرور",
+      create:"إنشاء حساب", login:"تسجيل الدخول",
+      s1:"من أين سمعت عنا؟", s1opts:["من صديق","مواقع التواصل الاجتماعي (Facebook/Instagram/TikTok)","محركات البحث","إعلان/منشور مدفوع","مصدر آخر"],
+      s2:"ما هدفك من إنشاء المتجر على Sellora؟", s2opts:["بيع منتجات شخصية / صنع يدوي","متجر تجزئة","بيع في فعاليات ومعارض","بيع عبر وسائل التواصل الاجتماعي","قصد الإدراج في الأسواق (Etsy/Amazon)"],
+      s3:"ماذا تخطط لبيع في متجرك؟ (اختر ما يناسب)", s3opts:["منتجات مادية (ساعات، ملابس، أكسسوارات)","منتجات رقمية (موسيقى، فن رقمي)","دروبشيبينغ","خدمات (تدريب، استشارات)","طباعة حسب الطلب","أغذية وبقالة","إلكترونيات","كتب ومواد تعليمية","مستحضرات تجميل","سأقرر لاحقاً"],
+      next:"التالي", back:"عودة", fill:"يرجى ملء جميع الخانات!", mism:"كلمات المرور غير متطابقة!"
+    },
+    en: {
+      title:"Sign Up", hint:"We will ask some optional questions after creating your account.",
+      name:"Full name", shop:"Store name", email:"Email", password:"Password", confirm:"Confirm password",
+      create:"Create Account", login:"Login",
+      s1:"Where did you hear about us?", s1opts:["From a friend","Social media (Facebook/Instagram/TikTok)","Search engines","Ad / paid post","Other"],
+      s2:"What is your goal for creating a store on Sellora?", s2opts:["Personal products / handmade","Retail store","Sell at events","Sell via social media","List on marketplaces (Etsy/Amazon)"],
+      s3:"What do you plan to sell? (choose all that apply)", s3opts:["Physical goods (watches, clothes, accessories)","Digital products (music, NFT art)","Dropshipping","Services (coaching, consulting)","Print on demand","Food & groceries","Electronics","Books & educational","Beauty products","I'll decide later"],
+      next:"Next", back:"Back", fill:"Please fill all fields!", mism:"Passwords do not match!"
+    },
+    fr: {
+      title:"Créer un compte", hint:"Nous poserons quelques questions optionnelles après la création du compte.",
+      name:"Nom complet", shop:"Nom du magasin", email:"E-mail", password:"Mot de passe", confirm:"Confirmer le mot de passe",
+      create:"Créer un compte", login:"Connexion",
+      s1:"D'où avez-vous entendu parler de nous?", s1opts:["D'un ami","Réseaux sociaux","Moteurs de recherche","Annonce / publication sponsorisée","Autre"],
+      s2:"Quel est votre objectif pour créer une boutique sur Sellora?", s2opts:["Produits personnels / fait main","Magasin de détail","Vendre lors d'événements","Vendre via les réseaux","Lister sur marketplaces (Etsy/Amazon)"],
+      s3:"Que prévoyez-vous de vendre? (choisissez ce qui convient)", s3opts:["Produits physiques","Produits numériques","Dropshipping","Services","Impression à la demande","Alimentation","Électronique","Livres","Produits de beauté","Je déciderai plus tard"],
+      next:"Suivant", back:"Retour", fill:"Veuillez remplir tous les champs!", mism:"Les mots de passe ne correspondent pas!"
+    },
+    es: {
+      title:"Crear cuenta", hint:"Preguntaremos algunas preguntas opcionales después de crear la cuenta.",
+      name:"Nombre completo", shop:"Nombre de la tienda", email:"Correo electrónico", password:"Contraseña", confirm:"Confirmar contraseña",
+      create:"Crear cuenta", login:"Iniciar sesión",
+      s1:"¿Dónde escuchaste sobre nosotros?", s1opts:["De un amigo","Redes sociales","Motores de búsqueda","Anuncio / publicación pagada","Otro"],
+      s2:"¿Cuál es tu objetivo al crear una tienda en Sellora?", s2opts:["Productos personales / artesanales","Tienda minorista","Vender en eventos","Vender por redes sociales","Listar en marketplaces (Etsy/Amazon)"],
+      s3:"¿Qué planeas vender? (elige lo que corresponda)", s3opts:["Productos físicos","Productos digitales","Dropshipping","Servicios","Impresión bajo demanda","Alimentos","Electrónica","Libros","Belleza","Decidiré más tarde"],
+      next:"Siguiente", back:"Atrás", fill:"Por favor completa todos los campos!", mism:"Las contraseñas no coinciden!"
+    }
+  };
+
+  // helper to get/set language
+  function getLang(){ return localStorage.getItem('lang')||'ar'; }
+  function setLanguage(lang){
+    localStorage.setItem('lang',lang);
+    const t = T[lang];
+    document.getElementById('title').innerText = t.title;
+    document.getElementById('createBtn').innerText = t.create;
+    document.getElementById('toLoginBtn').innerText = t.login;
+    document.getElementById('hint').innerText = t.hint;
+    // placeholders
+    document.getElementById('name').placeholder = t.name;
+    document.getElementById('shop').placeholder = t.shop;
+    document.getElementById('email').placeholder = t.email;
+    document.getElementById('password').placeholder = t.password;
+    document.getElementById('confirm').placeholder = t.confirm;
+    // steps' titles and options
+    document.getElementById('q1').innerText = t.s1;
+    document.getElementById('q2').innerText = t.s2;
+    document.getElementById('q3').innerText = t.s3;
+    // fill choices text
+    const ch1 = document.querySelectorAll('#choices1 .choice');
+    ch1.forEach((el,i)=> el.innerText = t.s1opts[i]);
+    const ch2 = document.querySelectorAll('#choices2 .choice');
+    ch2.forEach((el,i)=> el.innerText = t.s2opts[i]);
+    const ch3 = document.querySelectorAll('#choices3 .choice');
+    ch3.forEach((el,i)=> el.innerText = t.s3opts[i]);
+    document.getElementById('nextBtn').innerText = t.next;
+    document.getElementById('backBtn').innerText = t.back;
+  }
+
+  // init language UI
+  document.querySelectorAll('.lang-menu button').forEach(b=>{
+    // set data-lang attr
+    const text = b.innerText;
+    if(text==='العربية') b.dataset.lang='ar';
+    else if(text==='English') b.dataset.lang='en';
+    else if(text==='Français') b.dataset.lang='fr';
+    else if(text==='Español') b.dataset.lang='es';
+    b.addEventListener('click', ()=> setLanguage(b.dataset.lang));
+  });
+  // set initial
+  setLanguage( getLang() );
+
+  // signup logic
+  const createBtn = document.getElementById('createBtn');
+  const toLoginBtn = document.getElementById('toLoginBtn');
+  const msgEl = document.getElementById('msg');
+
+  toLoginBtn.onclick = ()=> location.href='login.html';
+
+  createBtn.onclick = ()=> {
+    msgEl.classList.add('hidden');
+    const name = document.getElementById('name');
+    const shop = document.getElementById('shop');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const confirm = document.getElementById('confirm');
+
+    // clear errors
+    [name,shop,email,password,confirm].forEach(i=> i.classList.remove('error'));
+
+    // validate
+    const lang = getLang();
+    if(!name.value.trim() || !shop.value.trim() || !email.value.trim() || !password.value || !confirm.value){
+      msgEl.innerText = T[lang].fill;
+      msgEl.classList.remove('hidden');
+      [name,shop,email,password,confirm].forEach(i=> { if(!i.value.trim()) i.classList.add('error'); });
+      return;
+    }
+    if(password.value !== confirm.value){
+      msgEl.innerText = T[lang].mism;
+      msgEl.classList.remove('hidden');
+      password.classList.add('error'); confirm.classList.add('error');
+      return;
     }
 
-    const savedLang = localStorage.getItem("lang") || "ar";
-    setLanguage(savedLang);
+    // save user locally (simple)
+    const users = JSON.parse(localStorage.getItem('sellora_users')||'[]');
+    // prevent duplicate email
+    if(users.find(u=>u.email===email.value.trim())){
+      msgEl.innerText = "Email already used"; // leave untranslated for simplicity
+      msgEl.classList.remove('hidden');
+      email.classList.add('error');
+      return;
+    }
+    const user = { id: Date.now(), name:name.value.trim(), shop:shop.value.trim(), email:email.value.trim(), password:password.value };
+    users.push(user);
+    localStorage.setItem('sellora_users', JSON.stringify(users));
+    localStorage.setItem('sellora_current_user', JSON.stringify(user));
 
-    document.getElementById("createBtn").onclick = () => {
-      let valid = true;
-      document.querySelectorAll(".form input").forEach(i => {
-        i.classList.remove("error");
-        if (i.value.trim() === "") {
-          i.classList.add("error");
-          valid = false;
-        }
-      });
-      if (!valid) return alert("يرجى ملء جميع الخانات!");
+    // move to steps
+    document.getElementById('signupCard').style.display='none';
+    document.getElementById('stepsCard').style.display='block';
+    currentStep = 1;
+    showStep(currentStep);
+  };
 
-      document.querySelector(".form").style.display = "none";
-      title.textContent = "أسئلة اختيارية";
-      document.getElementById("afterForm").style.display = "flex";
+  // Steps behaviour
+  let currentStep = 1;
+  const totalSteps = 3;
+  const answers = { step1:null, step2:null, step3:[] };
+
+  function showStep(n){
+    // hide all step elements
+    document.querySelectorAll('.step').forEach(el=> el.classList.add('hidden'));
+    document.getElementById('step'+n).classList.remove('hidden');
+    // update titles (already done by language)
+    // hide/show nav
+    document.getElementById('navBtns').style.display = 'flex';
+    // back button: if on step 1, back goes to main index
+    document.getElementById('backBtn').innerText = T[getLang()].back;
+    document.getElementById('nextBtn').innerText = (n===totalSteps ? T[getLang()].next : T[getLang()].next);
+  }
+
+  // choice click handlers:
+  function toggleSelect(e){
+    const el = e.currentTarget;
+    const parent = el.parentElement;
+    // if parent is choices3 allow multi-select, others single
+    if(parent.id === 'choices3'){
+      el.classList.toggle('selected');
+    } else {
+      // unselect siblings
+      parent.querySelectorAll('.choice').forEach(c=> c.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+  }
+  document.querySelectorAll('.choice').forEach(c=>{
+    c.addEventListener('click', toggleSelect);
+  });
+
+  // nav buttons
+  document.getElementById('nextBtn').addEventListener('click', ()=>{
+    const lang = getLang();
+    if(currentStep === 1){
+      // ensure selected
+      const sel = document.querySelector('#choices1 .choice.selected');
+      if(!sel){ alert(T[lang].fill); return; }
+      answers.step1 = sel.dataset.val || sel.innerText;
+      currentStep = 2; showStep(currentStep);
+      return;
+    }
+    if(currentStep === 2){
+      const sel = document.querySelector('#choices2 .choice.selected');
+      if(!sel){ alert(T[lang].fill); return; }
+      answers.step2 = sel.dataset.val || sel.innerText;
+      currentStep = 3; showStep(currentStep);
+      return;
+    }
+    if(currentStep === 3){
+      const sels = Array.from(document.querySelectorAll('#choices3 .choice.selected'));
+      if(sels.length === 0){ alert(T[lang].fill); return; }
+      answers.step3 = sels.map(s=> s.dataset.val || s.innerText);
+      // finalize: create store and redirect to store page
+      finalizeStore();
+      return;
+    }
+  });
+
+  document.getElementById('backBtn').addEventListener('click', ()=>{
+    if(currentStep === 1){
+      // go back to index (or cancel flow)
+      window.location.href = 'index.html';
+      return;
+    }
+    currentStep--; showStep(currentStep);
+  });
+
+  function finalizeStore(){
+    const user = JSON.parse(localStorage.getItem('sellora_current_user'));
+    if(!user) { alert('No user found'); location.href='index.html'; return; }
+    // create store object from user + answers
+    const store = {
+      id: Date.now(),
+      ownerId: user.id,
+      ownerName: user.name,
+      shopName: user.shop,
+      email: user.email,
+      about: 'متجر ' + user.shop,
+      from: answers.step1,
+      purpose: answers.step2,
+      categories: answers.step3,
+      products: [
+        // example starter products (you can change or expand)
+        {id:1, title:'Classic Watch', price:120, img:'https://images.unsplash.com/photo-1518544880522-8e1d0b3f8f4b?auto=format&fit=crop&w=600&q=60'},
+        {id:2, title:'Casual Shirt', price:45, img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=60'},
+        {id:3, title:'Wireless Headphones', price:80, img:'https://images.unsplash.com/photo-1518441902114-5f1c7a43f5dd?auto=format&fit=crop&w=600&q=60'}
+      ]
     };
+    // save store
+    localStorage.setItem('sellora_store_'+user.id, JSON.stringify(store));
+    localStorage.setItem('sellora_current_store', JSON.stringify(store));
+    // clear temporary answers
+    // redirect to store page
+    window.location.href = 'store.html';
+  }
 
-    function back() { window.location.href = "index.html"; }
-    function next() { alert("تم الانتقال للخطوة التالية ✅"); }
-  </script>
+  // when page loads, if user already has a current_user and you want to skip signup show steps? keep as is.
+  // ready
+</script>
 </body>
 </html>
