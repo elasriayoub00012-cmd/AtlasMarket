@@ -1,173 +1,105 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sellora - Login</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #FFD700;
-      font-family: "Poppins", sans-serif;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
-    header {
-      position: absolute;
-      top: 15px;
-      left: 20px;
-      font-weight: bold;
-      font-size: 26px;
-      color: #000;
-    }
-    .language-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      background: white;
-      border: 1px solid #ccc;
-      padding: 8px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      color: #000;
-    }
-    .language-menu {
-      display: none;
-      position: absolute;
-      top: 55px;
-      right: 20px;
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-    .language-menu button {
-      width: 100%;
-      background: none;
-      border: none;
-      text-align: left;
-      padding: 10px 15px;
-      cursor: pointer;
-      color: #000;
-      font-size: 16px;
-    }
-    .language-menu button:hover {
-      background: #f0f0f0;
-    }
-    h1 {
-      font-size: 32px;
-      font-weight: 500;
-      margin-top: 80px;
-      margin-bottom: 25px;
-    }
-    .form {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      width: 85%;
-      max-width: 350px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .form input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    .form input.error {
-      border: 2px solid red;
-    }
-    .form button {
-      width: 100%;
-      padding: 14px;
-      border-radius: 8px;
-      border: none;
-      color: white;
-      font-size: 17px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .submit {
-      background: #007bff;
-      margin-bottom: 10px;
-    }
-    .back {
-      background: #000;
-    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Poppins",sans-serif;background:#FFD700;height:100vh;display:flex;flex-direction:column;align-items:center}
+    header{position:absolute;left:20px;top:15px;font-weight:700;font-size:22px}
+    .lang-btn{position:absolute;right:20px;top:15px;background:#fff;border:1px solid #ccc;padding:8px 12px;border-radius:8px;cursor:pointer;color:#000;font-weight:600}
+    .lang-menu{display:none;position:absolute;right:20px;top:55px;background:#fff;border:1px solid #ccc;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+    .lang-menu button{display:block;width:100%;padding:10px 14px;border:none;background:none;text-align:left;cursor:pointer;color:#000}
+    main{width:100%;max-width:420px;margin-top:90px;padding:20px}
+    .card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 6px 18px rgba(0,0,0,0.15)}
+    h1{text-align:center;font-weight:300;margin:0 0 18px 0;font-size:32px}
+    input{width:100%;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:15px;margin-bottom:12px}
+    input.error{border:2px solid red}
+    .btn{width:100%;padding:12px;border-radius:8px;border:none;color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+    .btn.blue{background:#007bff;margin-bottom:8px}
+    .btn.gray{background:#333}
+    .small{font-size:14px;color:#333;text-align:center;margin-top:8px}
   </style>
 </head>
 <body>
   <header>Sellora</header>
-
-  <button class="language-btn" id="langBtn">Langue</button>
-  <div class="language-menu" id="langMenu">
-    <button onclick="setLanguage('ar')">العربية</button>
-    <button onclick="setLanguage('en')">English</button>
-    <button onclick="setLanguage('fr')">Français</button>
-    <button onclick="setLanguage('es')">Español</button>
+  <button class="lang-btn" id="langBtn">Langue</button>
+  <div class="lang-menu" id="langMenu">
+    <button data-lang="ar">العربية</button>
+    <button data-lang="en">English</button>
+    <button data-lang="fr">Français</button>
+    <button data-lang="es">Español</button>
   </div>
 
-  <h1 id="title">تسجيل الدخول</h1>
+  <main>
+    <div class="card">
+      <h1 id="title">تسجيل الدخول</h1>
+      <div id="msg" style="color:red;font-weight:700;display:none;margin-bottom:8px"></div>
+      <input id="email" placeholder="البريد الإلكتروني" />
+      <input id="password" type="password" placeholder="كلمة المرور" />
+      <button class="btn blue" id="loginBtn">تسجيل الدخول</button>
+      <button class="btn gray" id="toSignup">إنشاء حساب</button>
+      <p class="small">— أو —</p>
+      <p class="small">تذكر: التسجيل يتم محليًا الآن (سيتم ربطه بقاعدة حقيقية لاحقًا).</p>
+    </div>
+  </main>
 
-  <div class="form">
-    <input id="email" placeholder="البريد الإلكتروني">
-    <input id="password" type="password" placeholder="كلمة المرور">
-    <button class="submit" id="loginBtn">تسجيل الدخول</button>
-    <button class="back" onclick="window.location.href='index.html'">عودة</button>
-  </div>
+<script>
+  // translations
+  const T = {
+    ar:{title:"تسجيل الدخول",email:"البريد الإلكتروني",pass:"كلمة المرور",login:"تسجيل الدخول",signup:"إنشاء حساب",err:"الإيميل أو كلمة المرور خاطئة"},
+    en:{title:"Login",email:"Email",pass:"Password",login:"Login",signup:"Sign Up",err:"Email or password incorrect"},
+    fr:{title:"Connexion",email:"E-mail",pass:"Mot de passe",login:"Connexion",signup:"S'inscrire",err:"Email ou mot de passe incorrect"},
+    es:{title:"Iniciar sesión",email:"Correo electrónico",pass:"Contraseña",login:"Iniciar sesión",signup:"Registrarse",err:"Email o contraseña incorrecta"}
+  };
+  function getLang(){return localStorage.getItem('lang')||'ar'}
+  function applyLang(lang){
+    const t = T[lang];
+    document.getElementById('title').innerText = t.title;
+    document.getElementById('email').placeholder = t.email;
+    document.getElementById('password').placeholder = t.pass;
+    document.getElementById('loginBtn').innerText = t.login;
+    document.getElementById('toSignup').innerText = t.signup;
+  }
+  // init
+  applyLang(getLang());
 
-  <script>
-    const langBtn = document.getElementById("langBtn");
-    const langMenu = document.getElementById("langMenu");
-    const title = document.getElementById("title");
-    const loginBtn = document.getElementById("loginBtn");
+  // lang menu
+  document.getElementById('langBtn').addEventListener('click', ()=> {
+    const m = document.getElementById('langMenu');
+    m.style.display = m.style.display==='block'?'none':'block';
+  });
+  document.querySelectorAll('.lang-menu button').forEach(b=>{
+    b.addEventListener('click', ()=> {
+      const lang = b.dataset.lang;
+      localStorage.setItem('lang',lang);
+      applyLang(lang);
+      document.getElementById('langMenu').style.display='none';
+    });
+  });
 
-    const placeholders = {
-      ar: ["البريد الإلكتروني", "كلمة المرور", "تسجيل الدخول"],
-      en: ["Email", "Password", "Login"],
-      fr: ["E-mail", "Mot de passe", "Connexion"],
-      es: ["Correo electrónico", "Contraseña", "Iniciar sesión"]
-    };
+  document.getElementById('toSignup').addEventListener('click', ()=> location.href='signup.html');
 
-    langBtn.onclick = () => {
-      langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
-    };
-
-    function setLanguage(lang) {
-      const inputs = document.querySelectorAll(".form input");
-      const t = placeholders[lang];
-      title.textContent = t[2];
-      loginBtn.textContent = t[2];
-      inputs.forEach((input, i) => input.placeholder = t[i]);
-      localStorage.setItem("lang", lang);
-      langMenu.style.display = "none";
+  document.getElementById('loginBtn').addEventListener('click', ()=>{
+    const email = document.getElementById('email'), pass = document.getElementById('password');
+    email.classList.remove('error'); pass.classList.remove('error');
+    let users = JSON.parse(localStorage.getItem('sellora_users')||'[]');
+    const found = users.find(u=> u.email === email.value.trim() && u.password === pass.value);
+    if(!found){
+      document.getElementById('msg').innerText = T[getLang()].err;
+      document.getElementById('msg').style.display = 'block';
+      if(!email.value.trim()) email.classList.add('error');
+      if(!pass.value.trim()) pass.classList.add('error');
+      return;
     }
-
-    const savedLang = localStorage.getItem("lang") || "ar";
-    setLanguage(savedLang);
-
-    document.getElementById("loginBtn").onclick = () => {
-      const email = document.getElementById("email");
-      const pass = document.getElementById("password");
-      email.classList.remove("error");
-      pass.classList.remove("error");
-
-      if (email.value.trim() === "" || pass.value.trim() === "") {
-        if (email.value.trim() === "") email.classList.add("error");
-        if (pass.value.trim() === "") pass.classList.add("error");
-        alert("يرجى ملء جميع الخانات!");
-        return;
-      }
-
-      alert("تم تسجيل الدخول بنجاح ✅");
-    };
-  </script>
+    // login successful
+    localStorage.setItem('sellora_current_user', JSON.stringify(found));
+    // if a store exists for this user redirect to store
+    const store = JSON.parse(localStorage.getItem('sellora_store_'+found.id) || 'null');
+    if(store) localStorage.setItem('sellora_current_store', JSON.stringify(store));
+    window.location.href = 'store.html';
+  });
+</script>
 </body>
 </html>
