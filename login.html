@@ -1,39 +1,163 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Login - Sellora</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول - Sellora</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #FFD700;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      font-weight: bold;
+      font-size: 24px;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 40px;
+      font-weight: 400;
+      margin-bottom: 30px;
+      color: #000;
+    }
+
+    form {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      gap: 15px;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    button {
+      border: none;
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 17px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #loginBtn {
+      background-color: #007bff;
+    }
+
+    #signupBtn {
+      background-color: red;
+    }
+
+    .language-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .language-menu {
+      display: none;
+      position: absolute;
+      top: 55px;
+      right: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .language-menu button {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .language-menu button:hover {
+      background: #f0f0f0;
+    }
+  </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">Sellora</div>
-    <div class="controls">
-      <button id="langBtn" class="lang-btn">🌐 Language</button>
-      <div id="langMenu" class="lang-menu">
-        <button data-lang="en">English</button>
-        <button data-lang="ar">العربية</button>
-        <button data-lang="fr">Français</button>
-        <button data-lang="es">Español</button>
-      </div>
-    </div>
-  </header>
+  <header>Sellora</header>
 
-  <main class="form-page">
-    <div class="form-card">
-      <h2 id="loginTitle">Login</h2>
-      <form id="loginForm">
-        <label id="labelUser">Username or Email</label>
-        <input id="loginUser" type="text" placeholder="Email or username" required />
-        <label id="labelPass">Password</label>
-        <input id="loginPass" type="password" placeholder="Password" required />
-        <button type="submit" class="btn login-btn">Login</button>
-      </form>
-      <p class="small">No account? <a href="signup.html" id="toSignup">Sign up</a></p>
-    </div>
-  </main>
+  <button class="language-btn" id="langBtn">Lange</button>
+  <div class="language-menu" id="langMenu">
+    <button onclick="setLanguage('ar')">العربية</button>
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('fr')">Français</button>
+    <button onclick="setLanguage('es')">Español</button>
+  </div>
 
-  <script src="script.js"></script>
+  <h1 id="formTitle">تسجيل الدخول</h1>
+
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+    <input type="password" id="password" placeholder="كلمة المرور" required>
+    <button id="loginBtn" type="submit">تسجيل الدخول</button>
+    <button id="signupBtn" type="button" onclick="goToPage('signup.html')">إنشاء حساب</button>
+  </form>
+
+  <script>
+    const langBtn = document.getElementById("langBtn");
+    const langMenu = document.getElementById("langMenu");
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    const formTitle = document.getElementById("formTitle");
+
+    const translations = {
+      ar: { title: "تسجيل الدخول", login: "تسجيل الدخول", signup: "إنشاء حساب" },
+      en: { title: "Login", login: "Login", signup: "Sign Up" },
+      fr: { title: "Connexion", login: "Connexion", signup: "S'inscrire" },
+      es: { title: "Iniciar sesión", login: "Iniciar sesión", signup: "Registrarse" }
+    };
+
+    langBtn.addEventListener("click", () => {
+      langMenu.style.display = langMenu.style.display === "block" ? "none" : "block";
+    });
+
+    function setLanguage(lang) {
+      formTitle.textContent = translations[lang].title;
+      loginBtn.textContent = translations[lang].login;
+      signupBtn.textContent = translations[lang].signup;
+      localStorage.setItem("selectedLang", lang);
+      langMenu.style.display = "none";
+    }
+
+    const savedLang = localStorage.getItem("selectedLang") || "ar";
+    setLanguage(savedLang);
+
+    function goToPage(page) {
+      window.location.href = page;
+    }
+  </script>
 </body>
 </html>
