@@ -1,216 +1,223 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sellora - Dashboard</title>
+  <title>Sellora - لوحة التحكم</title>
   <style>
     body {
+      font-family: "Poppins", "Tajawal", sans-serif;
+      background-color: #ffffff;
       margin: 0;
-      font-family: "Poppins", sans-serif;
-      background-color: #ffcc00;
-    }
-
-    /* الشريط العلوي */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      background-color: #ffcc00;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 10;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 22px;
-      color: #000;
-    }
-
-    .lang-btn {
-      background-color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 14px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    /* المحتوى الرئيسي */
-    main {
-      margin-top: 100px;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .welcome {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 25px;
-    }
-
-    .create-store-btn {
-      background-color: #e60000;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 12px 24px;
-      font-size: 18px;
-      cursor: pointer;
+      padding: 0;
       transition: 0.3s;
     }
 
-    .create-store-btn:hover {
-      background-color: #cc0000;
+    header {
+      background-color: #FFD43B;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    /* المتاجر الأخرى */
-    .stores-section {
-      margin-top: 40px;
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #333;
     }
 
-    .stores-title {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 20px;
+    .lang-btn {
+      background-color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      color: #333;
+      transition: 0.3s;
     }
 
-    .store-grid {
+    .lang-btn:hover {
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .create-store {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-bottom: 25px;
+    }
+
+    .create-store:hover {
+      background-color: #0056b3;
+    }
+
+    .store-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 20px;
     }
 
     .store-card {
-      background-color: white;
+      border: 2px solid #eee;
       border-radius: 12px;
       padding: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       text-align: center;
-    }
-
-    .store-card img {
-      width: 100%;
-      border-radius: 10px;
-      height: 130px;
-      object-fit: cover;
-    }
-
-    .store-card h3 {
-      margin: 10px 0 5px;
-    }
-
-    .store-card p {
-      color: #555;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-
-    .visit-btn {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 16px;
-      cursor: pointer;
+      background-color: #fafafa;
       transition: 0.3s;
     }
 
-    .visit-btn:hover {
-      background-color: #0056b3;
+    .store-card:hover {
+      border-color: #007bff;
+      background-color: #f8faff;
+    }
+
+    .store-card h3 {
+      margin: 10px 0;
+      font-size: 1.2rem;
+    }
+
+    .store-card p {
+      color: #666;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">Sellora</div>
-    <button class="lang-btn" id="langBtn">Langue</button>
+    <h1 id="title">Sellora</h1>
+    <button class="lang-btn" id="langBtn">🇫🇷 Français</button>
   </header>
 
-  <main>
-    <div class="welcome" id="welcomeText">👋 مرحبًا بك في Sellora!</div>
+  <div class="container">
+    <button class="create-store" id="createStoreBtn">+ إنشاء متجر</button>
 
-    <!-- زر إنشاء متجر -->
-    <button class="create-store-btn" id="createStoreBtn">إنشاء متجر جديد</button>
+    <h2 id="myStoresTitle">🛍️ متاجرك</h2>
+    <div class="store-list" id="myStores">
+      <p id="noStores">لم تقم بإنشاء أي متجر بعد.</p>
+    </div>
 
-    <!-- قسم المتاجر الأخرى -->
-    <section class="stores-section">
-      <div class="stores-title" id="exploreTitle">🛍️ تصفح متاجر أخرى</div>
-      <div class="store-grid">
-        <div class="store-card">
-          <img src="https://picsum.photos/300/200?random=1" alt="Store">
-          <h3>متجر FashionPro</h3>
-          <p>ملابس وإكسسوارات</p>
-          <button class="visit-btn">زيارة</button>
-        </div>
-
-        <div class="store-card">
-          <img src="https://picsum.photos/300/200?random=2" alt="Store">
-          <h3>TechHouse</h3>
-          <p>أجهزة إلكترونية</p>
-          <button class="visit-btn">زيارة</button>
-        </div>
-
-        <div class="store-card">
-          <img src="https://picsum.photos/300/200?random=3" alt="Store">
-          <h3>BeautyGlow</h3>
-          <p>منتجات تجميل</p>
-          <button class="visit-btn">زيارة</button>
-        </div>
-      </div>
-    </section>
-  </main>
+    <h2 id="publicStoresTitle" style="margin-top:40px;">🌍 متاجر عامة</h2>
+    <div class="store-list" id="publicStores"></div>
+  </div>
 
   <script>
-    // زر اللغة + الترجمة
-    const langBtn = document.getElementById('langBtn');
-    const welcomeText = document.getElementById('welcomeText');
-    const createStoreBtn = document.getElementById('createStoreBtn');
-    const exploreTitle = document.getElementById('exploreTitle');
+    let currentLang = "ar";
 
-    let currentLang = 'ar';
+    const myStores = document.getElementById('myStores');
+    const publicStores = document.getElementById('publicStores');
+    const langBtn = document.getElementById('langBtn');
+    const createStoreBtn = document.getElementById('createStoreBtn');
+    const title = document.getElementById('title');
+    const myStoresTitle = document.getElementById('myStoresTitle');
+    const publicStoresTitle = document.getElementById('publicStoresTitle');
+    const noStores = document.getElementById('noStores');
 
     const translations = {
       ar: {
-        welcome: "👋 مرحبًا بك في Sellora!",
-        createStore: "إنشاء متجر جديد",
-        explore: "🛍️ تصفح متاجر أخرى",
-        lang: "Langue"
-      },
-      en: {
-        welcome: "👋 Welcome to Sellora!",
-        createStore: "Create New Store",
-        explore: "🛍️ Explore Other Stores",
-        lang: "Language"
+        title: "Sellora - لوحة التحكم",
+        createStore: "+ إنشاء متجر",
+        myStoresTitle: "🛍️ متاجرك",
+        noStores: "لم تقم بإنشاء أي متجر بعد.",
+        publicStoresTitle: "🌍 متاجر عامة",
+        langBtn: "🇫🇷 Français",
+        promptName: "أدخل اسم المتجر الجديد:",
+        success: "تم إنشاء المتجر بنجاح!",
+        owner: "المالك",
+        products: "عدد المنتجات",
+        newStore: "متجرك الجديد 🚀"
       },
       fr: {
-        welcome: "👋 Bienvenue sur Sellora!",
-        createStore: "Créer une nouvelle boutique",
-        explore: "🛍️ Explorer d'autres boutiques",
-        lang: "Langue"
+        title: "Sellora - Tableau de bord",
+        createStore: "+ Créer une boutique",
+        myStoresTitle: "🛍️ Vos boutiques",
+        noStores: "Vous n'avez encore créé aucune boutique.",
+        publicStoresTitle: "🌍 Boutiques publiques",
+        langBtn: "🇸🇦 العربية",
+        promptName: "Entrez le nom de la nouvelle boutique :",
+        success: "Boutique créée avec succès !",
+        owner: "Propriétaire",
+        products: "Produits",
+        newStore: "Votre nouvelle boutique 🚀"
       }
     };
 
-    langBtn.onclick = () => {
-      const newLang = prompt("Choose language: ar / en / fr", currentLang);
-      if (translations[newLang]) {
-        currentLang = newLang;
-        applyLang(newLang);
-      }
-    };
+    const stores = [
+      { name: "Madada", owner: "Ayoub", products: 24 },
+      { name: "TechWave", owner: "Sara", products: 18 },
+      { name: "UrbanStyle", owner: "Hicham", products: 32 },
+      { name: "BookNest", owner: "Laila", products: 12 }
+    ];
 
-    function applyLang(lang) {
-      const t = translations[lang];
-      welcomeText.textContent = t.welcome;
-      createStoreBtn.textContent = t.createStore;
-      exploreTitle.textContent = t.explore;
-      langBtn.textContent = t.lang;
+    function renderStores() {
+      publicStores.innerHTML = "";
+      const t = translations[currentLang];
+      stores.forEach(s => {
+        const div = document.createElement('div');
+        div.className = 'store-card';
+        div.innerHTML = `
+          <h3>${s.name}</h3>
+          <p>${t.owner}: ${s.owner}</p>
+          <p>${t.products}: ${s.products}</p>
+        `;
+        publicStores.appendChild(div);
+      });
     }
+
+    function updateLanguage() {
+      const t = translations[currentLang];
+      document.title = t.title;
+      title.textContent = "Sellora";
+      createStoreBtn.textContent = t.createStore;
+      myStoresTitle.textContent = t.myStoresTitle;
+      noStores.textContent = t.noStores;
+      publicStoresTitle.textContent = t.publicStoresTitle;
+      langBtn.textContent = t.langBtn;
+      renderStores();
+
+      // اتجاه النص
+      if (currentLang === "ar") {
+        document.body.setAttribute("dir", "rtl");
+      } else {
+        document.body.setAttribute("dir", "ltr");
+      }
+    }
+
+    createStoreBtn.addEventListener('click', () => {
+      const t = translations[currentLang];
+      const name = prompt(t.promptName);
+      if (name) {
+        const div = document.createElement('div');
+        div.className = 'store-card';
+        div.innerHTML = `
+          <h3>${name}</h3>
+          <p>${t.newStore}</p>
+        `;
+        myStores.innerHTML = "";
+        myStores.appendChild(div);
+        alert(t.success);
+      }
+    });
+
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === "ar" ? "fr" : "ar";
+      updateLanguage();
+    });
+
+    renderStores();
   </script>
 </body>
 </html>
