@@ -186,7 +186,7 @@
     function showStep(index) {
       steps.forEach((s, i) => s.classList.toggle('hidden', i !== index));
       backBtn.style.display = index === 0 ? 'none' : 'inline-block';
-      nextBtn.style.display = index === steps.length - 1 ? 'none' : 'inline-block';
+      nextBtn.innerText = index === steps.length - 1 ? 'Finish' : 'Next';
     }
 
     document.querySelectorAll('.option').forEach(option => {
@@ -194,8 +194,13 @@
     });
 
     nextBtn.addEventListener('click', () => {
-      if (currentStep < steps.length - 1) currentStep++;
-      showStep(currentStep);
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      } else {
+        // لما يسالي الإعداد ينتقل مباشرة للداشبورد
+        window.location.href = "dashboard.html";
+      }
     });
 
     backBtn.addEventListener('click', () => {
